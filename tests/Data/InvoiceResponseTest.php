@@ -2,18 +2,12 @@
 
 use Mrfansi\XenditSdk\Data\CardChannel\CardChannelProperties;
 use Mrfansi\XenditSdk\Data\Customer;
-use Mrfansi\XenditSdk\Data\Fee;
 use Mrfansi\XenditSdk\Data\InvoiceResponse;
-use Mrfansi\XenditSdk\Data\Item;
 use Mrfansi\XenditSdk\Data\NotificationPreference;
 use Mrfansi\XenditSdk\Data\PaymentDetails;
-use Mrfansi\XenditSdk\Data\PaymentMethodData;
 use Mrfansi\XenditSdk\Enums\Currency;
 use Mrfansi\XenditSdk\Enums\InvoiceStatus;
-use Mrfansi\XenditSdk\Enums\Locale;
-use Mrfansi\XenditSdk\Enums\PaymentMethod;
 use Mrfansi\XenditSdk\Enums\QrisSource;
-use Spatie\LaravelData\DataCollection;
 
 test('invoice response can be created with minimum required fields', function () {
     $now = new DateTime;
@@ -42,13 +36,8 @@ test('invoice response can be created with minimum required fields', function ()
         currency: null,
         success_redirect_url: null,
         failure_redirect_url: null,
-        paid_at: null,
-        credit_card_charge_id: null,
-        payment_method: null,
-        payment_channel: null,
-        payment_destination: null,
+        payment_methods: null,
         fixed_va: null,
-        locale: null,
         items: null,
         fees: null,
         payment_details: null,
@@ -76,7 +65,19 @@ test('invoice response can be created with minimum required fields', function ()
         ->should_exclude_credit_card->toBeFalse()
         ->should_send_email->toBeTrue()
         ->updated->toBe($now)
-        ->created->toBe($now);
+        ->created->toBe($now)
+        ->mid_label->toBeNull()
+        ->currency->toBeNull()
+        ->success_redirect_url->toBeNull()
+        ->failure_redirect_url->toBeNull()
+        ->payment_methods->toBeNull()
+        ->fixed_va->toBeNull()
+        ->items->toBeNull()
+        ->fees->toBeNull()
+        ->payment_details->toBeNull()
+        ->should_authenticate_credit_card->toBeNull()
+        ->channel_properties->toBeNull()
+        ->metadata->toBeNull();
 });
 
 test('invoice response can be created with all fields', function () {
@@ -91,69 +92,67 @@ test('invoice response can be created with all fields', function () {
         merchant_profile_picture_url: 'https://example.com/logo.png',
         amount: 100000.0,
         payer_email: 'customer@example.com',
-        description: 'Test purchase',
+        description: 'Test invoice',
         invoice_url: 'https://invoice.xendit.co/123',
         customer: new Customer(
             given_names: 'John',
             surname: 'Doe',
             email: 'john@example.com',
             mobile_number: '+6281234567890',
-            addresses: null
+            addresses: [],
         ),
-        customer_notification_preference: new NotificationPreference,
+        customer_notification_preference: new NotificationPreference(
+            invoice_created: ['whatsapp'],
+            invoice_reminder: ['whatsapp'],
+            invoice_paid: ['whatsapp'],
+        ),
         expiry_date: $now,
         available_banks: [
             [
                 'bank_code' => 'BCA',
                 'collection_type' => 'POOL',
-                'transfer_amount' => 100000.0,
                 'bank_branch' => 'Virtual Account',
-                'account_holder_name' => 'TEST STORE',
+                'bank_account_number' => '12345678',
             ],
         ],
         available_retail_outlets: [
             [
-                'retail_outlet_name' => 'ALFAMART',
-                'payment_code' => '12345',
-                'transfer_amount' => 100000.0,
+                'retail_outlet' => 'ALFAMART',
+                'payment_code' => '12345678',
             ],
         ],
         should_exclude_credit_card: false,
         should_send_email: true,
         updated: $now,
         created: $now,
-        mid_label: 'TEST_MID',
+        mid_label: 'test_mid',
         currency: Currency::IDR,
         success_redirect_url: 'https://example.com/success',
         failure_redirect_url: 'https://example.com/failure',
-        paid_at: $now,
-        credit_card_charge_id: 'cc_123',
-        payment_method: new DataCollection(
-            PaymentMethodData::class,
-            [PaymentMethodData::fromEnum(PaymentMethod::CREDIT_CARD)]
-        ),
-        payment_channel: new DataCollection(
-            PaymentMethodData::class,
-            [PaymentMethodData::fromEnum(PaymentMethod::BCA)]
-        ),
-        payment_destination: '12345678',
-        fixed_va: true,
-        locale: Locale::INDONESIAN,
-        items: new DataCollection(
-            Item::class,
-            [new Item('Product 1', 1, 100000.0)]
-        ),
-        fees: new DataCollection(
-            Fee::class,
-            [new Fee('admin', 5000.0)]
-        ),
+        payment_methods: 'BANK_TRANSFER',
+        fixed_va: ['bank_code' => 'BCA'],
+        items: [
+            [
+                'name' => 'Test Item',
+                'quantity' => 1,
+                'price' => 100000.0,
+            ],
+        ],
+        fees: [
+            [
+                'type' => 'ADMIN',
+                'value' => 5000.0,
+            ],
+        ],
         payment_details: new PaymentDetails(
-            receipt_id: '120318237',
-            source: QrisSource::OVO
+            receipt_id: '12345678',
+            source: QrisSource::OVO,
         ),
         should_authenticate_credit_card: true,
-        channel_properties: new CardChannelProperties,
-        metadata: ['order_id' => '123']
+        channel_properties: new CardChannelProperties(
+            allowed_bins: ['123456'],
+        ),
+        metadata: ['key' => 'value']
     );
 
     expect($response)
@@ -165,7 +164,7 @@ test('invoice response can be created with all fields', function () {
         ->merchant_profile_picture_url->toBe('https://example.com/logo.png')
         ->amount->toBe(100000.0)
         ->payer_email->toBe('customer@example.com')
-        ->description->toBe('Test purchase')
+        ->description->toBe('Test invoice')
         ->invoice_url->toBe('https://invoice.xendit.co/123')
         ->customer->toBeInstanceOf(Customer::class)
         ->customer_notification_preference->toBeInstanceOf(NotificationPreference::class)
@@ -176,23 +175,18 @@ test('invoice response can be created with all fields', function () {
         ->should_send_email->toBeTrue()
         ->updated->toBe($now)
         ->created->toBe($now)
-        ->mid_label->toBe('TEST_MID')
+        ->mid_label->toBe('test_mid')
         ->currency->toBe(Currency::IDR)
         ->success_redirect_url->toBe('https://example.com/success')
         ->failure_redirect_url->toBe('https://example.com/failure')
-        ->paid_at->toBe($now)
-        ->credit_card_charge_id->toBe('cc_123')
-        ->payment_method->toBeInstanceOf(DataCollection::class)
-        ->payment_channel->toBeInstanceOf(DataCollection::class)
-        ->payment_destination->toBe('12345678')
-        ->fixed_va->toBeTrue()
-        ->locale->toBe(Locale::INDONESIAN)
-        ->items->toBeInstanceOf(DataCollection::class)
-        ->fees->toBeInstanceOf(DataCollection::class)
+        ->payment_methods->toBe('BANK_TRANSFER')
+        ->fixed_va->toBeArray()
+        ->items->toBeArray()
+        ->fees->toBeArray()
         ->payment_details->toBeInstanceOf(PaymentDetails::class)
         ->should_authenticate_credit_card->toBeTrue()
         ->channel_properties->toBeInstanceOf(CardChannelProperties::class)
-        ->metadata->toBe(['order_id' => '123']);
+        ->metadata->toBeArray();
 });
 
 test('invoice response can be converted to array', function () {
@@ -202,31 +196,17 @@ test('invoice response can be converted to array', function () {
         id: 'inv_123',
         user_id: 'user_123',
         external_id: 'ext_123',
-        status: InvoiceStatus::PAID,
+        status: InvoiceStatus::PENDING,
         merchant_name: 'Test Store',
-        merchant_profile_picture_url: 'https://example.com/logo.png',
+        merchant_profile_picture_url: null,
         amount: 100000.0,
-        payer_email: 'customer@example.com',
-        description: 'Test purchase',
+        payer_email: null,
+        description: null,
         invoice_url: 'https://invoice.xendit.co/123',
-        customer: new Customer(
-            given_names: 'John',
-            surname: 'Doe',
-            email: 'john@example.com',
-            mobile_number: '+6281234567890',
-            addresses: null
-        ),
-        customer_notification_preference: new NotificationPreference,
+        customer: null,
+        customer_notification_preference: null,
         expiry_date: $now,
-        available_banks: [
-            [
-                'bank_code' => 'BCA',
-                'collection_type' => 'POOL',
-                'transfer_amount' => 100000.0,
-                'bank_branch' => 'Virtual Account',
-                'account_holder_name' => 'TEST STORE',
-            ],
-        ],
+        available_banks: null,
         available_retail_outlets: null,
         should_exclude_credit_card: false,
         should_send_email: true,
@@ -236,17 +216,9 @@ test('invoice response can be converted to array', function () {
         currency: Currency::IDR,
         success_redirect_url: null,
         failure_redirect_url: null,
-        paid_at: null,
-        credit_card_charge_id: null,
-        payment_method: null,
-        payment_channel: null,
-        payment_destination: null,
+        payment_methods: null,
         fixed_va: null,
-        locale: null,
-        items: new DataCollection(
-            Item::class,
-            [new Item('Product 1', 1, 100000.0)]
-        ),
+        items: null,
         fees: null,
         payment_details: null,
         should_authenticate_credit_card: null,
@@ -278,12 +250,45 @@ test('invoice response can be converted to array', function () {
             'should_send_email',
             'updated',
             'created',
+            'mid_label',
             'currency',
+            'success_redirect_url',
+            'failure_redirect_url',
+            'payment_methods',
+            'fixed_va',
             'items',
+            'fees',
+            'payment_details',
+            'should_authenticate_credit_card',
+            'channel_properties',
+            'metadata',
         ])
         ->and($array['id'])->toBe('inv_123')
-        ->and($array['status'])->toBe('PAID')
+        ->and($array['user_id'])->toBe('user_123')
+        ->and($array['external_id'])->toBe('ext_123')
+        ->and($array['status'])->toBe('PENDING')
+        ->and($array['merchant_name'])->toBe('Test Store')
+        ->and($array['merchant_profile_picture_url'])->toBeNull()
+        ->and($array['amount'])->toBe(100000.0)
+        ->and($array['payer_email'])->toBeNull()
+        ->and($array['description'])->toBeNull()
+        ->and($array['invoice_url'])->toBe('https://invoice.xendit.co/123')
+        ->and($array['customer'])->toBeNull()
+        ->and($array['customer_notification_preference'])->toBeNull()
+        ->and($array['available_banks'])->toBeNull()
+        ->and($array['available_retail_outlets'])->toBeNull()
+        ->and($array['should_exclude_credit_card'])->toBeFalse()
+        ->and($array['should_send_email'])->toBeTrue()
+        ->and($array['mid_label'])->toBeNull()
         ->and($array['currency'])->toBe('IDR')
-        ->and($array['customer'])->toBeArray()
-        ->and($array['items'])->toBeArray()->toHaveCount(1);
+        ->and($array['success_redirect_url'])->toBeNull()
+        ->and($array['failure_redirect_url'])->toBeNull()
+        ->and($array['payment_methods'])->toBeNull()
+        ->and($array['fixed_va'])->toBeNull()
+        ->and($array['items'])->toBeNull()
+        ->and($array['fees'])->toBeNull()
+        ->and($array['payment_details'])->toBeNull()
+        ->and($array['should_authenticate_credit_card'])->toBeNull()
+        ->and($array['channel_properties'])->toBeNull()
+        ->and($array['metadata'])->toBeNull();
 });

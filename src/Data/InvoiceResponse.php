@@ -7,12 +7,15 @@ use Mrfansi\XenditSdk\Data\CardChannel\CardChannelProperties;
 use Mrfansi\XenditSdk\Enums\Currency;
 use Mrfansi\XenditSdk\Enums\InvoiceStatus;
 use Mrfansi\XenditSdk\Enums\Locale;
+use Mrfansi\XenditSdk\Traits\EnumToArray;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
 class InvoiceResponse extends Data
 {
+    use EnumToArray;
+
     /**
      * Constructor for the InvoiceResponse class.
      *
@@ -37,21 +40,16 @@ class InvoiceResponse extends Data
      * @param  DateTimeInterface  $created  Creation timestamp
      * @param  string|null  $mid_label  MID label for credit card payments
      * @param  Currency|null  $currency  Invoice currency
-     * @param  string|null  $success_redirect_url  Success redirect URL
-     * @param  string|null  $failure_redirect_url  Failure redirect URL
-     * @param  DateTimeInterface|null  $paid_at  Payment timestamp
-     * @param  string|null  $credit_card_charge_id  Credit card charge ID
-     * @param  DataCollection|null  $payment_method  Payment methods used
-     * @param  DataCollection|null  $payment_channel  Payment channels used
-     * @param  string|null  $payment_destination  Virtual Account number or payment code
-     * @param  bool|null  $fixed_va  Whether to enable one VA number for customers
-     * @param  Locale|null  $locale  Invoice locale
-     * @param  DataCollection|null  $items  Items in the invoice
-     * @param  DataCollection|null  $fees  Additional fees
-     * @param  PaymentDetails|null  $payment_details  QRIS payment details
-     * @param  bool|null  $should_authenticate_credit_card  Whether to authenticate credit card payments
-     * @param  CardChannelProperties|null  $channel_properties  Channel-specific properties
-     * @param  array|null  $metadata  User defined metadata
+     * @param  string|null  $success_redirect_url  URL to redirect after successful payment
+     * @param  string|null  $failure_redirect_url  URL to redirect after failed payment
+     * @param  string|null  $payment_methods  Payment methods
+     * @param  array|null  $fixed_va  Fixed VA configuration
+     * @param  array|null  $items  Items in the invoice
+     * @param  array|null  $fees  Additional fees
+     * @param  PaymentDetails|null  $payment_details  Payment details
+     * @param  bool|null  $should_authenticate_credit_card  Should authenticate credit card payment
+     * @param  CardChannelProperties|null  $channel_properties  Channel properties
+     * @param  array|null  $metadata  Additional metadata
      */
     public function __construct(
         public string $id,
@@ -73,26 +71,37 @@ class InvoiceResponse extends Data
         public bool $should_send_email,
         public DateTimeInterface $updated,
         public DateTimeInterface $created,
-        public ?string $mid_label = null,
-        public ?Currency $currency = null,
-        public ?string $success_redirect_url = null,
-        public ?string $failure_redirect_url = null,
-        public ?DateTimeInterface $paid_at = null,
-        public ?string $credit_card_charge_id = null,
-        #[DataCollectionOf(PaymentMethodData::class)]
-        public ?DataCollection $payment_method = null,
-        #[DataCollectionOf(PaymentMethodData::class)]
-        public ?DataCollection $payment_channel = null,
-        public ?string $payment_destination = null,
-        public ?bool $fixed_va = null,
-        public ?Locale $locale = null,
-        #[DataCollectionOf(Item::class)]
-        public ?DataCollection $items = null,
-        #[DataCollectionOf(Fee::class)]
-        public ?DataCollection $fees = null,
-        public ?PaymentDetails $payment_details = null,
-        public ?bool $should_authenticate_credit_card = null,
-        public ?CardChannelProperties $channel_properties = null,
-        public ?array $metadata = null,
+        public ?string $mid_label,
+        public ?Currency $currency,
+        public ?string $success_redirect_url,
+        public ?string $failure_redirect_url,
+        public ?string $payment_methods,
+        public ?array $fixed_va,
+        public ?array $items,
+        public ?array $fees,
+        public ?PaymentDetails $payment_details,
+        public ?bool $should_authenticate_credit_card,
+        public ?CardChannelProperties $channel_properties,
+        public ?array $metadata,
     ) {}
+
+    /**
+     * Convert the data to an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
+    {
+        $array = parent::toArray();
+        
+        if ($this->status) {
+            $array['status'] = $this->enumToArray($this->status);
+        }
+        
+        if ($this->currency) {
+            $array['currency'] = $this->enumToArray($this->currency);
+        }
+
+        return $array;
+    }
 }
