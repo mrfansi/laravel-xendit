@@ -209,49 +209,4 @@ class InvoiceResponse extends Data
          */
         public ?array $metadata = null,
     ) {}
-
-    public function toArray(): array
-    {
-        $array = parent::toArray();
-
-        // Handle enums
-        $array['status'] = $this->status->value;
-        if ($this->currency) {
-            $array['currency'] = $this->currency->value;
-        }
-        if ($this->locale) {
-            $array['locale'] = $this->locale->value;
-        }
-
-        // Handle collections
-        if ($this->payment_method) {
-            $array['payment_method'] = array_map(
-                fn ($method) => $method->method->value,
-                $this->payment_method->items()
-            );
-        }
-
-        if ($this->payment_channel) {
-            $array['payment_channel'] = array_map(
-                fn ($method) => $method->method->value,
-                $this->payment_channel->items()
-            );
-        }
-
-        if ($this->items) {
-            $array['items'] = array_map(
-                fn ($item) => $item->toArray(),
-                $this->items->items()
-            );
-        }
-
-        if ($this->fees) {
-            $array['fees'] = array_map(
-                fn ($fee) => $fee->toArray(),
-                $this->fees->items()
-            );
-        }
-
-        return $array;
-    }
 }
