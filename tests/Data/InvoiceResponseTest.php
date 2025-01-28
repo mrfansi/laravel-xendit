@@ -7,6 +7,7 @@ use Mrfansi\XenditSdk\Data\NotificationPreference;
 use Mrfansi\XenditSdk\Data\PaymentDetails;
 use Mrfansi\XenditSdk\Enums\Currency;
 use Mrfansi\XenditSdk\Enums\InvoiceStatus;
+use Mrfansi\XenditSdk\Enums\NotificationChannel;
 use Mrfansi\XenditSdk\Enums\QrisSource;
 
 test('invoice response can be created with minimum required fields', function () {
@@ -102,9 +103,9 @@ test('invoice response can be created with all fields', function () {
             addresses: [],
         ),
         customer_notification_preference: new NotificationPreference(
-            invoice_created: ['whatsapp'],
-            invoice_reminder: ['whatsapp'],
-            invoice_paid: ['whatsapp'],
+            invoice_created: [NotificationChannel::WHATSAPP],
+            invoice_reminder: [NotificationChannel::WHATSAPP],
+            invoice_paid: [NotificationChannel::WHATSAPP],
         ),
         expiry_date: $now,
         available_banks: [
