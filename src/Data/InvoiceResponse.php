@@ -81,24 +81,4 @@ class InvoiceResponse extends Data
         public ?CardChannelProperties $channel_properties,
         public ?array $metadata,
     ) {}
-
-    /**
-     * Convert the data to an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(): array
-    {
-        $array = parent::toArray();
-
-        if ($this->status) {
-            $array['status'] = $this->enumToArray($this->status);
-        }
-
-        if ($this->currency) {
-            $array['currency'] = $this->enumToArray($this->currency);
-        }
-
-        return $array;
-    }
 }

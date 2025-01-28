@@ -13,10 +13,8 @@ class InvoiceStatusData extends Data
 
     /**
      * Create a new instance of `InvoiceStatusData` from an `InvoiceStatus` enum.
-     *
-     * @return static
      */
-    public static function fromEnum(InvoiceStatus $status): self
+    public static function fromEnum(InvoiceStatus $status): static
     {
         return new self($status);
     }

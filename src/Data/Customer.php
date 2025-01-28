@@ -40,7 +40,7 @@ class Customer extends Data
      *
      * @param  array<string, mixed>  $data  The array containing customer data
      */
-    public static function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
         $addresses = null;
         if (isset($data['addresses']) && is_array($data['addresses'])) {
@@ -50,7 +50,7 @@ class Customer extends Data
             );
         }
 
-        return new static(
+        return new self(
             given_names: $data['given_names'] ?? null,
             surname: $data['surname'] ?? null,
             email: $data['email'] ?? null,

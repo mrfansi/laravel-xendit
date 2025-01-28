@@ -33,7 +33,7 @@ class NotificationPreference extends Data
      *
      * @param  array<string, mixed>  $data  The array containing notification preferences
      */
-    public static function fromArray(array $data): static
+    public static function fromArray(array $data): self
     {
         $channels = ['invoice_created', 'invoice_reminder', 'invoice_paid'];
         $preferences = [];
@@ -49,7 +49,7 @@ class NotificationPreference extends Data
             }
         }
 
-        return new static(
+        return new self(
             invoice_created: $preferences['invoice_created'],
             invoice_reminder: $preferences['invoice_reminder'],
             invoice_paid: $preferences['invoice_paid']
