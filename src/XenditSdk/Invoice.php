@@ -14,11 +14,10 @@ class Invoice
     /**
      * Constructor for Invoice API client
      *
-     * @param PendingRequest $client HTTP client for making API requests
+     * @param  PendingRequest  $client  HTTP client for making API requests
      */
     public function __construct(PendingRequest $client)
     {
         $this->client = $client;
     }
-
 }
