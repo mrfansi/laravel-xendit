@@ -11,10 +11,10 @@ use Spatie\LaravelData\DataCollection;
 class InvoiceParams extends Data
 {
     /**
-     * Construct a new InvoiceParams instance
+     * Initialize a new instance of InvoiceParams
      *
      * @param  string|null  $external_id  The external ID used during generation of invoice
-     * @param  InvoiceStatusData[]|null  $statuses  Status of the invoices to filter
+     * @param  DataCollection<InvoiceStatusData>|null  $statuses  Status of the invoices to filter
      * @param  int|null  $limit  Number of invoices to return (1-100)
      * @param  DateTimeInterface|null  $created_after  Filter invoices created after this datetime
      * @param  DateTimeInterface|null  $created_before  Filter invoices created before this datetime
@@ -23,89 +23,28 @@ class InvoiceParams extends Data
      * @param  DateTimeInterface|null  $expired_after  Filter invoices expiring after this datetime
      * @param  DateTimeInterface|null  $expired_before  Filter invoices expiring before this datetime
      * @param  string|null  $last_invoice_id  Cursor for pagination (invoice ID)
-     * @param  ClientTypeData[]|null  $client_types  Methods used to create the invoices
-     * @param  PaymentMethodData[]|null  $payment_channels  Payment channels used
+     * @param  DataCollection<ClientTypeData>|null  $client_types  Methods used to create the invoices
+     * @param  DataCollection<PaymentMethodData>|null  $payment_channels  Payment channels used
      * @param  string|null  $on_demand_link  Filter by specific on-demand link
      * @param  string|null  $recurring_payment_id  Filter by specific recurring payment ID
      */
     public function __construct(
-        /**
-         * The external ID used during generation of invoice
-         */
         public ?string $external_id = null,
-
-        /**
-         * Status of the invoices to filter
-         *
-         * @var InvoiceStatusData[]|null
-         */
         #[DataCollectionOf(InvoiceStatusData::class)]
         public ?DataCollection $statuses = null,
-
-        /**
-         * Number of invoices to return (1-100)
-         */
         public ?int $limit = 10,
-
-        /**
-         * Filter invoices created after this datetime
-         */
         public ?DateTimeInterface $created_after = null,
-
-        /**
-         * Filter invoices created before this datetime
-         */
         public ?DateTimeInterface $created_before = null,
-
-        /**
-         * Filter invoices paid after this datetime
-         */
         public ?DateTimeInterface $paid_after = null,
-
-        /**
-         * Filter invoices paid before this datetime
-         */
         public ?DateTimeInterface $paid_before = null,
-
-        /**
-         * Filter invoices expiring after this datetime
-         */
         public ?DateTimeInterface $expired_after = null,
-
-        /**
-         * Filter invoices expiring before this datetime
-         */
         public ?DateTimeInterface $expired_before = null,
-
-        /**
-         * Cursor for pagination (invoice ID)
-         */
         public ?string $last_invoice_id = null,
-
-        /**
-         * Methods used to create the invoices
-         *
-         * @var ClientTypeData[]|null
-         */
         #[DataCollectionOf(ClientTypeData::class)]
         public ?DataCollection $client_types = null,
-
-        /**
-         * Payment channels used
-         *
-         * @var PaymentMethodData[]|null
-         */
         #[DataCollectionOf(PaymentMethodData::class)]
         public ?DataCollection $payment_channels = null,
-
-        /**
-         * Filter by specific on-demand link
-         */
         public ?string $on_demand_link = null,
-
-        /**
-         * Filter by specific recurring payment ID
-         */
         public ?string $recurring_payment_id = null,
     ) {
         $this->validateParams();

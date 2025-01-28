@@ -6,6 +6,17 @@ use Spatie\LaravelData\Data;
 
 class Item extends Data
 {
+    /**
+     * Item constructor.
+     *
+     * @param  string  $name  Item name. The name of the item being purchased.
+     * @param  int  $quantity  Item quantity. The quantity of the item being purchased.
+     * @param  float  $price  Item price. The price of the item being purchased.
+     * @param  string|null  $category  Item category. The category of the item being purchased.
+     * @param  string|null  $url  Item URL. The URL to the item being purchased.
+     *
+     * @throws \InvalidArgumentException If any of the validation rules fail.
+     */
     public function __construct(
         public string $name,
         public int $quantity,
