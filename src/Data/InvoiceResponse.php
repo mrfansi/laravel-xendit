@@ -6,11 +6,8 @@ use DateTimeInterface;
 use Mrfansi\XenditSdk\Data\CardChannel\CardChannelProperties;
 use Mrfansi\XenditSdk\Enums\Currency;
 use Mrfansi\XenditSdk\Enums\InvoiceStatus;
-use Mrfansi\XenditSdk\Enums\Locale;
 use Mrfansi\XenditSdk\Traits\EnumToArray;
-use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
-use Spatie\LaravelData\DataCollection;
 
 class InvoiceResponse extends Data
 {
@@ -93,11 +90,11 @@ class InvoiceResponse extends Data
     public function toArray(): array
     {
         $array = parent::toArray();
-        
+
         if ($this->status) {
             $array['status'] = $this->enumToArray($this->status);
         }
-        
+
         if ($this->currency) {
             $array['currency'] = $this->enumToArray($this->currency);
         }
