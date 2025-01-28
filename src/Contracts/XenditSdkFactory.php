@@ -2,7 +2,10 @@
 
 namespace Mrfansi\XenditSdk\Contracts;
 
-interface XenditSdk
+use Mrfansi\XenditSdk\XenditSdk\Invoice;
+use RuntimeException;
+
+interface XenditSdkFactory
 {
     /**
      * Sets the for-user-id header for xenPlatform sub-account transactions
@@ -24,4 +27,13 @@ interface XenditSdk
      * @param  string  $idempotencyKey  The unique key to prevent processing duplicate requests. Can be your reference_id or any GUID. Must be unique across development and production environments.
      */
     public function withIdempotencyKey(string $idempotencyKey): self;
+
+    /**
+     * Creates and returns a new Invoice API instance
+     *
+     * @return Invoice A configured Invoice instance for making API requests
+     *
+     * @throws RuntimeException If dependencies cannot be resolved
+     */
+    public function invoice(): Invoice;
 }

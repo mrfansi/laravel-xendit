@@ -1,6 +1,6 @@
 <?php
 
-// config for Mrfansi/XenditSdk
+// config for Mrfansi/XenditSdkFactory
 return [
 
 ];
