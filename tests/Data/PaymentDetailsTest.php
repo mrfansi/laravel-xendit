@@ -28,7 +28,7 @@ test('payment details can be converted to array', function () {
         source: QrisSource::OVO
     );
 
-    $array = $details->toArray();
+    $array = $details->all();
 
     expect($array)
         ->toHaveKeys(['receipt_id', 'source'])

@@ -37,7 +37,24 @@ test('invoice response can be created with minimum required fields', function ()
         should_exclude_credit_card: false,
         should_send_email: true,
         updated: $now,
-        created: $now
+        created: $now,
+        mid_label: null,
+        currency: null,
+        success_redirect_url: null,
+        failure_redirect_url: null,
+        paid_at: null,
+        credit_card_charge_id: null,
+        payment_method: null,
+        payment_channel: null,
+        payment_destination: null,
+        fixed_va: null,
+        locale: null,
+        items: null,
+        fees: null,
+        payment_details: null,
+        should_authenticate_credit_card: null,
+        channel_properties: null,
+        metadata: null
     );
 
     expect($response)
@@ -215,11 +232,26 @@ test('invoice response can be converted to array', function () {
         should_send_email: true,
         updated: $now,
         created: $now,
+        mid_label: null,
         currency: Currency::IDR,
+        success_redirect_url: null,
+        failure_redirect_url: null,
+        paid_at: null,
+        credit_card_charge_id: null,
+        payment_method: null,
+        payment_channel: null,
+        payment_destination: null,
+        fixed_va: null,
+        locale: null,
         items: new DataCollection(
             Item::class,
             [new Item('Product 1', 1, 100000.0)]
-        )
+        ),
+        fees: null,
+        payment_details: null,
+        should_authenticate_credit_card: null,
+        channel_properties: null,
+        metadata: null
     );
 
     $array = $response->toArray();

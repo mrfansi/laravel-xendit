@@ -18,4 +18,12 @@ class PaymentDetails extends Data
          */
         public ?QrisSource $source = null,
     ) {}
+
+    public function toArray(): array
+    {
+        return [
+            'receipt_id' => $this->receipt_id,
+            'source' => $this->source?->value,
+        ];
+    }
 }
