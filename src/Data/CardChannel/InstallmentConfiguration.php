@@ -8,6 +8,13 @@ use Spatie\LaravelData\DataCollection;
 
 class InstallmentConfiguration extends Data
 {
+    /**
+     * Creates a new InstallmentConfiguration instance
+     *
+     * @param  bool  $allow_installment  Whether end users can pay with installments
+     * @param  bool  $allow_full_payment  Whether to allow full payment option
+     * @param  DataCollection<AllowedTerm>|null  $allowed_terms  Allowed terms configuration for different issuers
+     */
     public function __construct(
         /**
          * Whether end users can pay with installments

@@ -14,6 +14,30 @@ use Spatie\LaravelData\DataCollection;
 
 class CreateInvoiceRequest extends Data
 {
+    /**
+     * Creates a new invoice request.
+     *
+     * @param  string  $external_id  Unique identifier for this invoice
+     * @param  float  $amount  Amount of the invoice
+     * @param  string|null  $description  Optional description of the invoice
+     * @param  Customer|null  $customer  Customer details
+     * @param  NotificationPreference|null  $customer_notification_preference  Notification preferences for the customer
+     * @param  int|null  $invoice_duration  Duration before invoice expires (in seconds)
+     * @param  string|null  $success_redirect_url  URL for successful payment redirect
+     * @param  string|null  $failure_redirect_url  URL for failed/expired payment redirect
+     * @param  PaymentMethod[]|null  $payment_methods  Available payment methods for this invoice
+     * @param  Currency|null  $currency  Currency of the invoice amount
+     * @param  string|null  $callback_virtual_account_id  Fixed Virtual Account ID for payment
+     * @param  string|null  $mid_label  MID label for acquiring bank (credit cards)
+     * @param  ReminderTimeUnit|null  $reminder_time_unit  Unit for reminder time (days/hours)
+     * @param  int|null  $reminder_time  When to send reminder notification
+     * @param  Locale|null  $locale  Display language
+     * @param  Item[]|null  $items  Items being purchased
+     * @param  Fee[]|null  $fees  Additional fees
+     * @param  bool|null  $should_authenticate_credit_card  Whether to authenticate credit card payment
+     * @param  CardChannelProperties|null  $channel_properties  Channel-specific properties
+     * @param  array<string, string>|null  $metadata  Additional metadata
+     */
     public function __construct(
         /**
          * ID of your choice (typically the unique identifier of an invoice in your system)

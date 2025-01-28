@@ -6,6 +6,16 @@ use Spatie\LaravelData\Data;
 
 class Address extends Data
 {
+    /**
+     * Constructs a new Address object.
+     *
+     * @param  string|null  $city  City where the address is located
+     * @param  string|null  $country  Country where the address is located (ISO 3166-1 alpha-2)
+     * @param  string|null  $postal_code  Postal code of the address
+     * @param  string|null  $state  State/province/region where the address is located
+     * @param  string|null  $street_line1  Street address line 1
+     * @param  string|null  $street_line2  Street address line 2
+     */
     public function __construct(
         public ?string $city,
         public ?string $country,

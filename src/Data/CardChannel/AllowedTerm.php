@@ -12,6 +12,12 @@ class AllowedTerm extends Data
         'MAYBANKID', 'BSI',
     ];
 
+    /**
+     * Constructor for AllowedTerm
+     *
+     * @param  string  $issuer  Issuing bank of the credit card
+     * @param  int[]  $terms  Terms of installment payment (positive numbers)
+     */
     public function __construct(
         /**
          * Issuing bank of the credit card

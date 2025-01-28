@@ -6,6 +6,12 @@ use Spatie\LaravelData\Data;
 
 class CardChannelProperties extends Data
 {
+    /**
+     * Constructor for CardChannelProperties.
+     *
+     * @param  string[]|null  $allowed_bins  Credit card BINs that will be accepted (6 or 8 digits)
+     * @param  InstallmentConfiguration|null  $installment_configuration  Installment configuration
+     */
     public function __construct(
         /**
          * Credit card BINs that will be accepted (6 or 8 digits)
