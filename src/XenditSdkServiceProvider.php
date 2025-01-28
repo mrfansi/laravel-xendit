@@ -2,9 +2,9 @@
 
 namespace Mrfansi\XenditSdk;
 
+use Mrfansi\XenditSdk\Commands\XenditSdkCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Mrfansi\XenditSdk\Commands\XenditSdkCommand;
 
 class XenditSdkServiceProvider extends PackageServiceProvider
 {
