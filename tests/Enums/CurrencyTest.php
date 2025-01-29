@@ -1,7 +1,7 @@
 <?php
 
-use Mrfansi\XenditSdk\Enums\CountryCode;
-use Mrfansi\XenditSdk\Enums\Currency;
+use Mrfansi\Xendit\Enums\CountryCode;
+use Mrfansi\Xendit\Enums\Currency;
 
 test('currency has correct values', function () {
     expect(Currency::IDR->value)->toBe('IDR')

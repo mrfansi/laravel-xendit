@@ -1,12 +1,12 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Data;
+namespace Mrfansi\Xendit\Data;
 
 use DateTimeInterface;
-use Mrfansi\XenditSdk\Data\CardChannel\CardChannelProperties;
-use Mrfansi\XenditSdk\Enums\Currency;
-use Mrfansi\XenditSdk\Enums\InvoiceStatus;
-use Mrfansi\XenditSdk\Traits\EnumToArray;
+use Mrfansi\Xendit\Data\CardChannel\CardChannelProperties;
+use Mrfansi\Xendit\Enums\Currency;
+use Mrfansi\Xendit\Enums\InvoiceStatus;
+use Mrfansi\Xendit\Traits\EnumToArray;
 use Spatie\LaravelData\Data;
 
 class InvoiceResponse extends Data

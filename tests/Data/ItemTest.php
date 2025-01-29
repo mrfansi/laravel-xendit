@@ -1,6 +1,6 @@
 <?php
 
-use Mrfansi\XenditSdk\Data\Item;
+use Mrfansi\Xendit\Data\Item;
 
 test('item can be created with required fields', function () {
     $item = new Item(

@@ -1,6 +1,6 @@
 <?php
 
-use Mrfansi\XenditSdk\Enums\InvoiceStatus;
+use Mrfansi\Xendit\Enums\InvoiceStatus;
 
 test('invoice status has correct values', function () {
     expect(InvoiceStatus::PENDING->value)->toBe('PENDING')

@@ -1,12 +1,12 @@
 <?php
 
-use Mrfansi\XenditSdk\Data\ClientTypeData;
-use Mrfansi\XenditSdk\Data\InvoiceParams;
-use Mrfansi\XenditSdk\Data\InvoiceStatusData;
-use Mrfansi\XenditSdk\Data\PaymentMethodData;
-use Mrfansi\XenditSdk\Enums\ClientType;
-use Mrfansi\XenditSdk\Enums\InvoiceStatus;
-use Mrfansi\XenditSdk\Enums\PaymentMethod;
+use Mrfansi\Xendit\Data\ClientTypeData;
+use Mrfansi\Xendit\Data\InvoiceParams;
+use Mrfansi\Xendit\Data\InvoiceStatusData;
+use Mrfansi\Xendit\Data\PaymentMethodData;
+use Mrfansi\Xendit\Enums\ClientType;
+use Mrfansi\Xendit\Enums\InvoiceStatus;
+use Mrfansi\Xendit\Enums\PaymentMethod;
 use Spatie\LaravelData\DataCollection;
 
 test('invoice params can be created with default values', function () {

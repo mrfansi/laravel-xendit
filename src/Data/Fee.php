@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Data;
+namespace Mrfansi\Xendit\Data;
 
 use Spatie\LaravelData\Data;
 

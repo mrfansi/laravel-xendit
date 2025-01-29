@@ -1,16 +1,16 @@
 <?php
 
-use Mrfansi\XenditSdk\Data\CardChannel\CardChannelProperties;
-use Mrfansi\XenditSdk\Data\CardChannel\InstallmentConfiguration;
-use Mrfansi\XenditSdk\Data\CreateInvoiceRequest;
-use Mrfansi\XenditSdk\Data\Customer;
-use Mrfansi\XenditSdk\Data\Fee;
-use Mrfansi\XenditSdk\Data\Item;
-use Mrfansi\XenditSdk\Data\NotificationPreference;
-use Mrfansi\XenditSdk\Enums\Currency;
-use Mrfansi\XenditSdk\Enums\Locale;
-use Mrfansi\XenditSdk\Enums\PaymentMethod;
-use Mrfansi\XenditSdk\Enums\ReminderTimeUnit;
+use Mrfansi\Xendit\Data\CardChannel\CardChannelProperties;
+use Mrfansi\Xendit\Data\CardChannel\InstallmentConfiguration;
+use Mrfansi\Xendit\Data\CreateInvoiceRequest;
+use Mrfansi\Xendit\Data\Customer;
+use Mrfansi\Xendit\Data\Fee;
+use Mrfansi\Xendit\Data\Item;
+use Mrfansi\Xendit\Data\NotificationPreference;
+use Mrfansi\Xendit\Enums\Currency;
+use Mrfansi\Xendit\Enums\Locale;
+use Mrfansi\Xendit\Enums\PaymentMethod;
+use Mrfansi\Xendit\Enums\ReminderTimeUnit;
 use Spatie\LaravelData\DataCollection;
 
 test('create invoice request can be created with minimum required fields', function () {

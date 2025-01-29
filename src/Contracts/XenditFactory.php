@@ -1,11 +1,11 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Contracts;
+namespace Mrfansi\Xendit\Contracts;
 
-use Mrfansi\XenditSdk\XenditSdk\Invoice;
+use Mrfansi\Xendit\Xendit\Invoice;
 use RuntimeException;
 
-interface XenditSdkFactory
+interface XenditFactory
 {
     /**
      * Sets the for-user-id header for xenPlatform sub-account transactions

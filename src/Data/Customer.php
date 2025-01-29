@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Data;
+namespace Mrfansi\Xendit\Data;
 
 use InvalidArgumentException;
 use Spatie\LaravelData\Data;

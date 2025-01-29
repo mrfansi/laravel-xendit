@@ -1,7 +1,7 @@
 <?php
 
-use Mrfansi\XenditSdk\Data\PaymentDetails;
-use Mrfansi\XenditSdk\Enums\QrisSource;
+use Mrfansi\Xendit\Data\PaymentDetails;
+use Mrfansi\Xendit\Enums\QrisSource;
 
 test('payment details can be created with null values', function () {
     $details = new PaymentDetails;

@@ -1,6 +1,6 @@
 <?php
 
-use Mrfansi\XenditSdk\Data\Fee;
+use Mrfansi\Xendit\Data\Fee;
 
 test('fee can be created with valid values', function () {
     $fee = new Fee(

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Traits;
+namespace Mrfansi\Xendit\Traits;
 
 trait EnumToArray
 {

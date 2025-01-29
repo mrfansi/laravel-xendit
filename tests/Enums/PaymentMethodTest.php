@@ -1,7 +1,7 @@
 <?php
 
-use Mrfansi\XenditSdk\Enums\CountryCode;
-use Mrfansi\XenditSdk\Enums\PaymentMethod;
+use Mrfansi\Xendit\Enums\CountryCode;
+use Mrfansi\Xendit\Enums\PaymentMethod;
 
 test('payment method has correct values', function () {
     // Test a few key payment methods from different countries

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Tests;
+namespace Mrfansi\Xendit\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Mrfansi\XenditSdk\XenditSdkServiceProvider;
+use Mrfansi\Xendit\XenditServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Mrfansi\\XenditSdkFactory\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Mrfansi\\XenditFactory\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            XenditSdkServiceProvider::class,
+            XenditServiceProvider::class,
         ];
     }
 

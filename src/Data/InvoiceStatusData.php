@@ -1,8 +1,8 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Data;
+namespace Mrfansi\Xendit\Data;
 
-use Mrfansi\XenditSdk\Enums\InvoiceStatus;
+use Mrfansi\Xendit\Enums\InvoiceStatus;
 use Spatie\LaravelData\Data;
 
 class InvoiceStatusData extends Data

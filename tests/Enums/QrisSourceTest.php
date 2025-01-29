@@ -1,6 +1,6 @@
 <?php
 
-use Mrfansi\XenditSdk\Enums\QrisSource;
+use Mrfansi\Xendit\Enums\QrisSource;
 
 test('qris source has correct values', function () {
     expect(QrisSource::OVO->value)->toBe('OVO')

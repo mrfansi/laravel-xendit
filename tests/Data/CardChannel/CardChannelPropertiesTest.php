@@ -1,8 +1,8 @@
 <?php
 
-use Mrfansi\XenditSdk\Data\CardChannel\AllowedTerm;
-use Mrfansi\XenditSdk\Data\CardChannel\CardChannelProperties;
-use Mrfansi\XenditSdk\Data\CardChannel\InstallmentConfiguration;
+use Mrfansi\Xendit\Data\CardChannel\AllowedTerm;
+use Mrfansi\Xendit\Data\CardChannel\CardChannelProperties;
+use Mrfansi\Xendit\Data\CardChannel\InstallmentConfiguration;
 use Spatie\LaravelData\DataCollection;
 
 test('card channel properties can be created with null values', function () {

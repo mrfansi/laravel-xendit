@@ -1,14 +1,14 @@
 <?php
 
-use Mrfansi\XenditSdk\Data\CardChannel\CardChannelProperties;
-use Mrfansi\XenditSdk\Data\Customer;
-use Mrfansi\XenditSdk\Data\InvoiceResponse;
-use Mrfansi\XenditSdk\Data\NotificationPreference;
-use Mrfansi\XenditSdk\Data\PaymentDetails;
-use Mrfansi\XenditSdk\Enums\Currency;
-use Mrfansi\XenditSdk\Enums\InvoiceStatus;
-use Mrfansi\XenditSdk\Enums\NotificationChannel;
-use Mrfansi\XenditSdk\Enums\QrisSource;
+use Mrfansi\Xendit\Data\CardChannel\CardChannelProperties;
+use Mrfansi\Xendit\Data\Customer;
+use Mrfansi\Xendit\Data\InvoiceResponse;
+use Mrfansi\Xendit\Data\NotificationPreference;
+use Mrfansi\Xendit\Data\PaymentDetails;
+use Mrfansi\Xendit\Enums\Currency;
+use Mrfansi\Xendit\Enums\InvoiceStatus;
+use Mrfansi\Xendit\Enums\NotificationChannel;
+use Mrfansi\Xendit\Enums\QrisSource;
 
 test('invoice response can be created with minimum required fields', function () {
     $now = new DateTime;

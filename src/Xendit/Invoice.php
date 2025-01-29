@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\XenditSdk\XenditSdk;
+namespace Mrfansi\Xendit\Xendit;
 
 use Illuminate\Http\Client\PendingRequest;
 

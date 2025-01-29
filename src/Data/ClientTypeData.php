@@ -1,8 +1,8 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Data;
+namespace Mrfansi\Xendit\Data;
 
-use Mrfansi\XenditSdk\Enums\ClientType;
+use Mrfansi\Xendit\Enums\ClientType;
 use Spatie\LaravelData\Data;
 
 class ClientTypeData extends Data

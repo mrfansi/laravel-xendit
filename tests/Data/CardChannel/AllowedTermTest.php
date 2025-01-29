@@ -1,6 +1,6 @@
 <?php
 
-use Mrfansi\XenditSdk\Data\CardChannel\AllowedTerm;
+use Mrfansi\Xendit\Data\CardChannel\AllowedTerm;
 
 test('allowed term can be created with valid issuer and terms', function () {
     $term = new AllowedTerm(

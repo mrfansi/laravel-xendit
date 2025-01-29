@@ -1,9 +1,9 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Data;
+namespace Mrfansi\Xendit\Data;
 
 use InvalidArgumentException;
-use Mrfansi\XenditSdk\Enums\NotificationChannel;
+use Mrfansi\Xendit\Enums\NotificationChannel;
 use Spatie\LaravelData\Data;
 
 class NotificationPreference extends Data

@@ -1,13 +1,13 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Data;
+namespace Mrfansi\Xendit\Data;
 
 use InvalidArgumentException;
-use Mrfansi\XenditSdk\Data\CardChannel\CardChannelProperties;
-use Mrfansi\XenditSdk\Enums\Currency;
-use Mrfansi\XenditSdk\Enums\Locale;
-use Mrfansi\XenditSdk\Enums\PaymentMethod;
-use Mrfansi\XenditSdk\Enums\ReminderTimeUnit;
+use Mrfansi\Xendit\Data\CardChannel\CardChannelProperties;
+use Mrfansi\Xendit\Enums\Currency;
+use Mrfansi\Xendit\Enums\Locale;
+use Mrfansi\Xendit\Enums\PaymentMethod;
+use Mrfansi\Xendit\Enums\ReminderTimeUnit;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Commands;
+namespace Mrfansi\Xendit\Commands;
 
 use Illuminate\Console\Command;
 
-class XenditSdkCommand extends Command
+class XenditCommand extends Command
 {
     public $signature = 'laravel-xendit';
 

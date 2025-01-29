@@ -1,6 +1,6 @@
 <?php
 
-use Mrfansi\XenditSdk\Enums\Locale;
+use Mrfansi\Xendit\Enums\Locale;
 
 test('locale has correct values', function () {
     expect(Locale::ENGLISH->value)->toBe('en')

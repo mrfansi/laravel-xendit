@@ -1,12 +1,12 @@
 <?php
 
-namespace Mrfansi\XenditSdk;
+namespace Mrfansi\Xendit;
 
-use Mrfansi\XenditSdk\Commands\XenditSdkCommand;
+use Mrfansi\Xendit\Commands\XenditCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class XenditSdkServiceProvider extends PackageServiceProvider
+class XenditServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -20,6 +20,6 @@ class XenditSdkServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_xendit_sdk_table')
-            ->hasCommand(XenditSdkCommand::class);
+            ->hasCommand(XenditCommand::class);
     }
 }

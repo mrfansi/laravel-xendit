@@ -52,8 +52,8 @@ php artisan vendor:publish --tag="laravel-xendit-views"
 ## Usage
 
 ```php
-$xenditSdk = new Mrfansi\XenditSdk();
-echo $xenditSdk->echoPhrase('Hello, Mrfansi!');
+$Xendit = new Mrfansi\Xendit();
+echo $Xendit->echoPhrase('Hello, Mrfansi!');
 ```
 
 ## Testing

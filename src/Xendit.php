@@ -1,15 +1,15 @@
 <?php
 
-namespace Mrfansi\XenditSdk;
+namespace Mrfansi\Xendit;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
-use Mrfansi\XenditSdk\Contracts\XenditSdkFactory;
-use Mrfansi\XenditSdk\XenditSdk\Invoice;
+use Mrfansi\Xendit\Contracts\XenditFactory;
+use Mrfansi\Xendit\Xendit\Invoice;
 use RuntimeException;
 
-class XenditSdk implements XenditSdkFactory
+class Xendit implements XenditFactory
 {
     /**
      * HTTP client instance for making API requests

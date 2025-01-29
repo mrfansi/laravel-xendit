@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Mrfansi\\XenditSdk\\": "src/",
-            "Mrfansi\\XenditSdk\\Database\\Factories\\": "database/factories/"
+            "Mrfansi\\Xendit\\": "src/",
+            "Mrfansi\\Xendit\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mrfansi\\XenditSdk\\Tests\\": "tests/",
+            "Mrfansi\\Xendit\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -63,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Mrfansi\\XenditSdk\\XenditSdkServiceProvider"
+                "Mrfansi\\Xendit\\XenditServiceProvider"
             ],
             "aliases": {
-                "XenditSdk": "Mrfansi\\XenditSdk\\Facades\\XenditSdk"
+                "Xendit": "Mrfansi\\Xendit\\Facades\\Xendit"
             }
         }
     },

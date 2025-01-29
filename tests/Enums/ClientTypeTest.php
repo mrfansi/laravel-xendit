@@ -1,6 +1,6 @@
 <?php
 
-use Mrfansi\XenditSdk\Enums\ClientType;
+use Mrfansi\Xendit\Enums\ClientType;
 
 test('client type has correct values', function () {
     expect(ClientType::API_GATEWAY->value)->toBe('API_GATEWAY')

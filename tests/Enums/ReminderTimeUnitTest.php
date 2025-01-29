@@ -1,6 +1,6 @@
 <?php
 
-use Mrfansi\XenditSdk\Enums\ReminderTimeUnit;
+use Mrfansi\Xendit\Enums\ReminderTimeUnit;
 
 test('reminder time unit has correct values', function () {
     expect(ReminderTimeUnit::DAYS->value)->toBe('days')

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Data\CardChannel;
+namespace Mrfansi\Xendit\Data\CardChannel;
 
 use Spatie\LaravelData\Data;
 

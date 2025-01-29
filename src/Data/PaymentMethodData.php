@@ -1,8 +1,8 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Data;
+namespace Mrfansi\Xendit\Data;
 
-use Mrfansi\XenditSdk\Enums\PaymentMethod;
+use Mrfansi\Xendit\Enums\PaymentMethod;
 use Spatie\LaravelData\Data;
 
 class PaymentMethodData extends Data

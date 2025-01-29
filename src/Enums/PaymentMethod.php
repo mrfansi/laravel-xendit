@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Enums;
+namespace Mrfansi\Xendit\Enums;
 
 enum PaymentMethod: string
 {

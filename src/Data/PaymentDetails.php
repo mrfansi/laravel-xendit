@@ -1,9 +1,9 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Data;
+namespace Mrfansi\Xendit\Data;
 
-use Mrfansi\XenditSdk\Enums\QrisSource;
-use Mrfansi\XenditSdk\Traits\EnumToArray;
+use Mrfansi\Xendit\Enums\QrisSource;
+use Mrfansi\Xendit\Traits\EnumToArray;
 use Spatie\LaravelData\Data;
 
 class PaymentDetails extends Data
