@@ -19,7 +19,7 @@ class XenditServiceProvider extends PackageServiceProvider
             ->name('laravel-xendit')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_xendit_sdk_table')
+            ->hasMigration('create_xendit_table')
             ->hasCommand(XenditCommand::class);
     }
 }
