@@ -12,7 +12,7 @@ use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
-class CreateInvoiceRequest extends Data
+class InvoiceData extends Data
 {
     public function __construct(
         /**
