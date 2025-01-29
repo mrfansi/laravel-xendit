@@ -1,19 +1,17 @@
 <?php
 
-namespace Mrfansi\XenditSdk\Database\Factories;
+// namespace Mrfansi\XenditSdk\Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+// use Illuminate\Database\Eloquent\Factories\Factory;
 
-/*
-class ModelFactory extends Factory
-{
-    protected $model = YourModel::class;
+// class ModelFactory extends Factory
+// {
+//     protected $model = YourModel::class;
 
-    public function definition()
-    {
-        return [
+//     public function definition()
+//     {
+//         return [
 
-        ];
-    }
-}
-*/
+//         ];
+//     }
+// }
