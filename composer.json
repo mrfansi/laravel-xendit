@@ -1,12 +1,12 @@
 {
-    "name": "mrfansi/xendit-sdk",
+    "name": "mrfansi/laravel-xendit",
     "description": "This is xendit payment gateway SDK",
     "keywords": [
         "mrfansi",
         "laravel",
-        "xendit-sdk"
+        "laravel-xendit"
     ],
-    "homepage": "https://github.com/mrfansi/xendit-sdk",
+    "homepage": "https://github.com/mrfansi/laravel-xendit",
     "license": "MIT",
     "authors": [
         {

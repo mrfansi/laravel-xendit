@@ -16,7 +16,7 @@ class XenditSdkServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('xendit-sdk')
+            ->name('laravel-xendit')
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_xendit_sdk_table')

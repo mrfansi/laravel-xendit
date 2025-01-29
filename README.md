@@ -1,15 +1,15 @@
 # This is xendit payment gateway SDK
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mrfansi/xendit-sdk.svg?style=flat-square)](https://packagist.org/packages/mrfansi/xendit-sdk)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mrfansi/xendit-sdk/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mrfansi/xendit-sdk/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/mrfansi/xendit-sdk/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/mrfansi/xendit-sdk/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/mrfansi/xendit-sdk.svg?style=flat-square)](https://packagist.org/packages/mrfansi/xendit-sdk)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mrfansi/laravel-xendit.svg?style=flat-square)](https://packagist.org/packages/mrfansi/laravel-xendit)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mrfansi/laravel-xendit/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mrfansi/laravel-xendit/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/mrfansi/laravel-xendit/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/mrfansi/laravel-xendit/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/mrfansi/laravel-xendit.svg?style=flat-square)](https://packagist.org/packages/mrfansi/laravel-xendit)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/xendit-sdk.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/xendit-sdk)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-xendit.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-xendit)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
@@ -20,20 +20,20 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require mrfansi/xendit-sdk
+composer require mrfansi/laravel-xendit
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="xendit-sdk-migrations"
+php artisan vendor:publish --tag="laravel-xendit-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="xendit-sdk-config"
+php artisan vendor:publish --tag="laravel-xendit-config"
 ```
 
 This is the contents of the published config file:
@@ -46,7 +46,7 @@ return [
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="xendit-sdk-views"
+php artisan vendor:publish --tag="laravel-xendit-views"
 ```
 
 ## Usage
@@ -76,8 +76,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Muhammad Irfan](https://github.com/mrfansi)
-- [All Contributors](../../contributors)
+-   [Muhammad Irfan](https://github.com/mrfansi)
+-   [All Contributors](../../contributors)
 
 ## License
 

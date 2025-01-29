@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class XenditSdkCommand extends Command
 {
-    public $signature = 'xendit-sdk';
+    public $signature = 'laravel-xendit';
 
     public $description = 'My command';
 
