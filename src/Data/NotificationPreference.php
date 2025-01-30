@@ -51,4 +51,18 @@ class NotificationPreference extends AbstractDataTransferObject
         $instance->whitelistedFields = $data['whitelisted_fields'] ?? null;
         return $instance;
     }
+
+    /**
+     * Convert instance to array
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'invoice_paid' => $this->invoicePaid,
+            'invoice_expired' => $this->invoiceExpired,
+            'whitelisted_fields' => $this->whitelistedFields,
+        ];
+    }
 }

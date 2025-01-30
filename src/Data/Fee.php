@@ -2,6 +2,7 @@
 
 namespace Mrfansi\Xendit\Data;
 
+use InvalidArgumentException;
 use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 
 /**
@@ -12,16 +13,32 @@ use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 class Fee extends AbstractDataTransferObject
 {
     /**
-     * @param  string|null  $type  Type of the fee (e.g., 'ADMIN', 'SERVICE', etc.)
-     * @param  float|null  $value  Amount of the fee
-     * @throws \InvalidArgumentException
+     * Create a new Fee instance
+     *
+     * @param  string|null  $type  Fee type (e.g. ADMIN, PLATFORM, DISCOUNT)
+     * @param  float|null  $value  Fee value
+     *
+     * @throws InvalidArgumentException
      */
     public function __construct(
         public ?string $type = null,
         public ?float $value = null,
     ) {
-        if ($type !== null && trim($type) === '') {
-            throw new \InvalidArgumentException('Fee type cannot be empty');
+        if ($type === '') {
+            throw new InvalidArgumentException('Fee type cannot be empty');
         }
+    }
+
+    /**
+     * Convert instance to array
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'type' => $this->type,
+            'value' => $this->value,
+        ];
     }
 }
