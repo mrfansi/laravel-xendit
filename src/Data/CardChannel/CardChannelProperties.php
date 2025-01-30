@@ -6,28 +6,26 @@ use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 
 /**
  * Class CardChannelProperties
- * 
+ *
  * Represents properties specific to card payment channel
  */
 class CardChannelProperties extends AbstractDataTransferObject
 {
     /**
-     * @param string|null $skipThreeDSecure Whether to skip 3D Secure authentication
-     * @param array<AllowedTerm>|null $allowedTerms List of allowed installment terms
-     * @param InstallmentConfiguration|null $installmentConfiguration Configuration for installment payments
+     * @param  string|null  $skipThreeDSecure  Whether to skip 3D Secure authentication
+     * @param  array<AllowedTerm>|null  $allowedTerms  List of allowed installment terms
+     * @param  InstallmentConfiguration|null  $installmentConfiguration  Configuration for installment payments
      */
     public function __construct(
         public ?string $skipThreeDSecure = null,
         public ?array $allowedTerms = null,
         public ?InstallmentConfiguration $installmentConfiguration = null,
-    ) {
-    }
+    ) {}
 
     /**
      * Create an instance from array data
-     * 
-     * @param array<string, mixed>|null $data
-     * @return static|null
+     *
+     * @param  array<string, mixed>|null  $data
      */
     public static function from(?array $data): ?static
     {
@@ -48,9 +46,8 @@ class CardChannelProperties extends AbstractDataTransferObject
 
     /**
      * Create an instance from array data
-     * 
-     * @param array<string, mixed> $data
-     * @return static
+     *
+     * @param  array<string, mixed>  $data
      */
     public static function fromArray(array $data): static
     {
