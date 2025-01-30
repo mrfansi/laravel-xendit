@@ -17,6 +17,7 @@ class CardChannelProperties extends AbstractDataTransferObject
      * @param  string|null  $skip_three_d_secure  Whether to skip 3D Secure authentication
      * @param  array<AllowedTerm>|null  $allowed_terms  List of allowed installment terms
      * @param  InstallmentConfiguration|null  $installment_configuration  Configuration for installment payments
+     *
      * @throws \InvalidArgumentException
      */
     public function __construct(
@@ -27,7 +28,7 @@ class CardChannelProperties extends AbstractDataTransferObject
     ) {
         if ($allowed_bins !== null) {
             foreach ($allowed_bins as $bin) {
-                if (!preg_match('/^\d{6}$|^\d{8}$/', $bin)) {
+                if (! preg_match('/^\d{6}$|^\d{8}$/', $bin)) {
                     throw new \InvalidArgumentException('Credit card BIN must be either 6 or 8 digits');
                 }
             }

@@ -49,6 +49,7 @@ class NotificationPreference extends AbstractDataTransferObject
         $instance->invoicePaid = $data['invoice_paid'] ?? null;
         $instance->invoiceExpired = $data['invoice_expired'] ?? null;
         $instance->whitelistedFields = $data['whitelisted_fields'] ?? null;
+
         return $instance;
     }
 }

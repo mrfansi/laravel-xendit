@@ -2,7 +2,6 @@
 
 namespace Mrfansi\Xendit\Data;
 
-use DateTimeInterface;
 use InvalidArgumentException;
 use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 use Mrfansi\Xendit\Enums\ReminderTimeUnit;
