@@ -1,7 +1,7 @@
 <?php
 
-use Mrfansi\Xendit\Data\Customer;
 use Mrfansi\Xendit\Data\Address;
+use Mrfansi\Xendit\Data\Customer;
 
 /**
  * Test cases for Customer Data Transfer Object
@@ -21,7 +21,7 @@ test('customer can be created with values', function () {
             postal_code: '67890',
             street_line1: 'Jalan Tunjungan',
             street_line2: null
-        )
+        ),
     ];
 
     $customer = new Customer(
@@ -50,7 +50,7 @@ test('customer can be created with values', function () {
 });
 
 test('customer can be created with null values', function () {
-    $customer = new Customer();
+    $customer = new Customer;
 
     expect($customer)
         ->given_names->toBeNull()
@@ -72,16 +72,16 @@ test('customer can be created from array', function () {
                 'country' => 'ID',
                 'postal_code' => '12345',
                 'street_line1' => 'Jalan Sudirman',
-                'street_line2' => 'Lantai 5'
+                'street_line2' => 'Lantai 5',
             ],
             [
                 'city' => 'Surabaya',
                 'country' => 'ID',
                 'postal_code' => '67890',
                 'street_line1' => 'Jalan Tunjungan',
-                'street_line2' => null
-            ]
-        ]
+                'street_line2' => null,
+            ],
+        ],
     ];
 
     $customer = Customer::fromArray($data);
@@ -118,7 +118,7 @@ test('customer can be converted to array', function () {
             postal_code: '67890',
             street_line1: 'Jalan Tunjungan',
             street_line2: null
-        )
+        ),
     ];
 
     $customer = new Customer(

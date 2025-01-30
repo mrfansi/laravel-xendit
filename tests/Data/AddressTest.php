@@ -23,7 +23,7 @@ test('address can be created with values', function () {
 });
 
 test('address can be created with null values', function () {
-    $address = new Address();
+    $address = new Address;
 
     expect($address)
         ->city->toBeNull()
@@ -39,7 +39,7 @@ test('address can be created from array', function () {
         'country' => 'ID',
         'postal_code' => '12345',
         'street_line1' => 'Jalan Sudirman',
-        'street_line2' => 'Lantai 5'
+        'street_line2' => 'Lantai 5',
     ]);
 
     expect($address)
