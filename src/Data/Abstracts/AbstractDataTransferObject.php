@@ -42,7 +42,6 @@ abstract class AbstractDataTransferObject implements DataTransferObject
      * Create DTO from array
      *
      * @param  array<string, mixed>  $data
-     * @return static
      */
     public static function fromArray(array $data): static
     {

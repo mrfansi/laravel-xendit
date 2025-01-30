@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use DateTimeInterface;
 use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 use Mrfansi\Xendit\Data\CardChannel\CardChannelProperties;
-use Mrfansi\Xendit\Data\Customer;
 use Mrfansi\Xendit\Enums\Currency;
 use Mrfansi\Xendit\Enums\InvoiceStatus;
 use Mrfansi\Xendit\Traits\EnumToArray;
@@ -95,7 +94,6 @@ class InvoiceResponse extends AbstractDataTransferObject
      * Create an instance from array data
      *
      * @param  array<string, mixed>|null  $data
-     * @return static|null
      */
     public static function from(?array $data): ?static
     {
@@ -110,13 +108,12 @@ class InvoiceResponse extends AbstractDataTransferObject
      * Create an instance from array data
      *
      * @param  array<string, mixed>  $data
-     * @return static
      */
     public static function fromArray(array $data): static
     {
         /** @var static */
         $instance = (new ReflectionClass(static::class))->newInstance();
-        
+
         $instance->id = $data['id'] ?? null;
         $instance->external_id = $data['external_id'] ?? null;
         $instance->user_id = $data['user_id'] ?? null;
