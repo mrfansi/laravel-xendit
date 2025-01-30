@@ -11,9 +11,9 @@ use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
  */
 class Item extends AbstractDataTransferObject
 {
-    public const MAX_NAME_LENGTH = 200;
+    public const MAX_NAME_LENGTH = 256;
 
-    public const MAX_QUANTITY = 1000000;
+    public const MAX_QUANTITY = 510000;
 
     /**
      * Create a new Item instance
@@ -33,26 +33,16 @@ class Item extends AbstractDataTransferObject
         public ?string $category = null,
         public ?string $url = null,
     ) {
-        $this->validateParams();
-    }
-
-    /**
-     * Validate item parameters
-     *
-     * @throws InvalidArgumentException
-     */
-    protected function validateParams(): void
-    {
-        if ($this->name !== null && (strlen($this->name) < 1 || strlen($this->name) > self::MAX_NAME_LENGTH)) {
-            throw new \InvalidArgumentException('name must be between 1 and '.self::MAX_NAME_LENGTH.' characters');
+        if ($name !== null && strlen($name) > self::MAX_NAME_LENGTH) {
+            throw new \InvalidArgumentException('Item name cannot exceed '.self::MAX_NAME_LENGTH.' characters');
         }
 
-        if ($this->quantity !== null && ($this->quantity < 1 || $this->quantity > self::MAX_QUANTITY)) {
-            throw new \InvalidArgumentException('quantity must be between 1 and '.self::MAX_QUANTITY);
+        if ($quantity !== null && $quantity > self::MAX_QUANTITY) {
+            throw new \InvalidArgumentException('Item quantity cannot exceed '.self::MAX_QUANTITY);
         }
 
-        if ($this->url !== null && ! filter_var($this->url, FILTER_VALIDATE_URL)) {
-            throw new \InvalidArgumentException('URL must be valid');
+        if ($url !== null && ! filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED)) {
+            throw new \InvalidArgumentException('Item URL must be a valid HTTP or HTTPS URL');
         }
     }
 

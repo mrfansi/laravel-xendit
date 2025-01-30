@@ -2,8 +2,8 @@
 
 namespace Mrfansi\Xendit\Data;
 
-use Mrfansi\Xendit\Enums\QrisSource;
 use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
+use Mrfansi\Xendit\Enums\QrisSource;
 use ReflectionClass;
 
 /**

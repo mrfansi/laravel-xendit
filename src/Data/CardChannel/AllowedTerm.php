@@ -21,7 +21,7 @@ class AllowedTerm extends AbstractDataTransferObject
         'MANDIRI',
         'CIMB',
         'MEGA',
-        'PERMATA'
+        'PERMATA',
     ];
 
     /**
@@ -29,6 +29,7 @@ class AllowedTerm extends AbstractDataTransferObject
      * @param  array|null  $terms  List of allowed terms
      * @param  float|null  $minAmount  Minimum amount for this term
      * @param  float|null  $maxAmount  Maximum amount for this term
+     *
      * @throws \InvalidArgumentException
      */
     public function __construct(
@@ -37,13 +38,13 @@ class AllowedTerm extends AbstractDataTransferObject
         public ?float $minAmount = null,
         public ?float $maxAmount = null,
     ) {
-        if ($issuer !== null && !in_array($issuer, self::ALLOWED_ISSUERS)) {
+        if ($issuer !== null && ! in_array($issuer, self::ALLOWED_ISSUERS)) {
             throw new \InvalidArgumentException('Invalid issuer');
         }
 
         if ($terms !== null) {
             foreach ($terms as $term) {
-                if (!is_int($term) || $term <= 0) {
+                if (! is_int($term) || $term <= 0) {
                     throw new \InvalidArgumentException('Terms must be positive integers');
                 }
             }

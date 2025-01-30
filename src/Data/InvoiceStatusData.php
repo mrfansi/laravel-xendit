@@ -22,8 +22,6 @@ class InvoiceStatusData extends AbstractDataTransferObject
 
     /**
      * Create an instance from InvoiceStatus enum
-     *
-     * @param  InvoiceStatus  $status
      */
     public static function fromEnum(InvoiceStatus $status): static
     {
@@ -40,6 +38,7 @@ class InvoiceStatusData extends AbstractDataTransferObject
         /** @var static */
         $instance = (new ReflectionClass(static::class))->newInstance();
         $instance->status = $data['status'] ?? null;
+
         return $instance;
     }
 }

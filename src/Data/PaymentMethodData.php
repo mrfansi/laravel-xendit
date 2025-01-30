@@ -24,8 +24,6 @@ class PaymentMethodData extends AbstractDataTransferObject
 
     /**
      * Create an instance from PaymentMethod enum
-     *
-     * @param  PaymentMethod  $method
      */
     public static function fromEnum(PaymentMethod $method): static
     {
@@ -43,6 +41,7 @@ class PaymentMethodData extends AbstractDataTransferObject
         $instance = (new ReflectionClass(static::class))->newInstance();
         $instance->type = $data['type'] ?? null;
         $instance->reusability = $data['reusability'] ?? null;
+
         return $instance;
     }
 }
