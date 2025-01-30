@@ -3,6 +3,7 @@
 namespace Mrfansi\Xendit\Data;
 
 use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
+use ReflectionClass;
 
 /**
  * Class NotificationPreference
@@ -34,5 +35,20 @@ class NotificationPreference extends AbstractDataTransferObject
         }
 
         return filter_var($url, FILTER_VALIDATE_URL) !== false;
+    }
+
+    /**
+     * Create an instance from array data
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public static function fromArray(array $data): static
+    {
+        /** @var static */
+        $instance = (new ReflectionClass(static::class))->newInstance();
+        $instance->invoicePaid = $data['invoice_paid'] ?? null;
+        $instance->invoiceExpired = $data['invoice_expired'] ?? null;
+        $instance->whitelistedFields = $data['whitelisted_fields'] ?? null;
+        return $instance;
     }
 }

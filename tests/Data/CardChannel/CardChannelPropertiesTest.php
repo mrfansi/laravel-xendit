@@ -90,10 +90,10 @@ test('card channel properties can be converted to array', function () {
         installment_configuration: $installmentConfig
     );
 
-    $array = $props->all();
-    $installmentConfigArray = $props->installment_configuration->all();
+    $array = $props->toArray();
+    $installmentConfigArray = $props->installment_configuration->toArray();
     $allowedTermsArray = array_map(
-        fn ($term) => $term->all(),
+        fn ($term) => $term->toArray(),
         $props->installment_configuration->allowed_terms->items()
     );
 

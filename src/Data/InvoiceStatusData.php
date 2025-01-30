@@ -3,6 +3,8 @@
 namespace Mrfansi\Xendit\Data;
 
 use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
+use Mrfansi\Xendit\Enums\InvoiceStatus;
+use ReflectionClass;
 
 /**
  * Class InvoiceStatusData
@@ -17,4 +19,27 @@ class InvoiceStatusData extends AbstractDataTransferObject
     public function __construct(
         public ?string $status = null,
     ) {}
+
+    /**
+     * Create an instance from InvoiceStatus enum
+     *
+     * @param  InvoiceStatus  $status
+     */
+    public static function fromEnum(InvoiceStatus $status): static
+    {
+        return new static(status: $status->value);
+    }
+
+    /**
+     * Create an instance from array data
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public static function fromArray(array $data): static
+    {
+        /** @var static */
+        $instance = (new ReflectionClass(static::class))->newInstance();
+        $instance->status = $data['status'] ?? null;
+        return $instance;
+    }
 }

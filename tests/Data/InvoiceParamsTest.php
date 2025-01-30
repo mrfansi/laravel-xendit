@@ -252,3 +252,55 @@ test('invoice params can be converted to array', function () {
             PaymentMethod::OVO->value
         );
 });
+
+test('invoice params can be converted to query parameters', function () {
+    $now = new DateTime;
+    $tomorrow = (new DateTime)->modify('+1 day');
+
+    $params = new InvoiceParams(
+        external_id: 'inv-123',
+        statuses: new DataCollection(
+            InvoiceStatusData::class,
+            [
+                InvoiceStatusData::fromEnum(InvoiceStatus::PENDING),
+                InvoiceStatusData::fromEnum(InvoiceStatus::PAID),
+            ]
+        ),
+        limit: 20,
+        created_after: $now,
+        created_before: $tomorrow,
+        client_types: new DataCollection(
+            ClientTypeData::class,
+            [
+                ClientTypeData::fromEnum(ClientType::API_GATEWAY),
+            ]
+        ),
+        payment_channels: new DataCollection(
+            PaymentMethodData::class,
+            [
+                PaymentMethodData::fromEnum(PaymentMethod::OVO),
+            ]
+        )
+    );
+
+    $queryParams = $params->all();
+
+    expect($queryParams)
+        ->toBeArray()
+        ->toHaveKeys([
+            'external_id',
+            'statuses',
+            'limit',
+            'created_after',
+            'created_before',
+            'client_types',
+            'payment_channels'
+        ])
+        ->external_id->toBe('inv-123')
+        ->limit->toBe(20)
+        ->created_after->toBe($now->format('c'))
+        ->created_before->toBe($tomorrow->format('c'))
+        ->statuses->toBe([InvoiceStatus::PENDING->value, InvoiceStatus::PAID->value])
+        ->client_types->toBe([ClientType::API_GATEWAY->value])
+        ->payment_channels->toBe([PaymentMethod::OVO->value]);
+});

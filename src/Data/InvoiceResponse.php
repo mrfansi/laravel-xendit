@@ -135,8 +135,18 @@ class InvoiceResponse extends AbstractDataTransferObject
         $instance->should_send_email = $data['should_send_email'] ?? null;
         $instance->created = isset($data['created']) ? Carbon::parse($data['created']) : null;
         $instance->updated = isset($data['updated']) ? Carbon::parse($data['updated']) : null;
+        $instance->mid_label = $data['mid_label'] ?? null;
         $instance->currency = isset($data['currency']) ? Currency::from($data['currency']) : null;
+        $instance->success_redirect_url = $data['success_redirect_url'] ?? null;
+        $instance->failure_redirect_url = $data['failure_redirect_url'] ?? null;
+        $instance->payment_methods = $data['payment_methods'] ?? null;
+        $instance->fixed_va = $data['fixed_va'] ?? null;
         $instance->items = isset($data['items']) ? array_map(fn ($item) => Item::fromArray($item), $data['items']) : null;
+        $instance->fees = isset($data['fees']) ? array_map(fn ($fee) => Fee::fromArray($fee), $data['fees']) : null;
+        $instance->payment_details = isset($data['payment_details']) ? array_map(fn ($detail) => PaymentDetails::fromArray($detail), $data['payment_details']) : null;
+        $instance->should_authenticate_credit_card = $data['should_authenticate_credit_card'] ?? null;
+        $instance->channel_properties = isset($data['channel_properties']) ? CardChannelProperties::fromArray($data['channel_properties']) : null;
+        $instance->metadata = $data['metadata'] ?? null;
         $instance->customer = isset($data['customer']) ? Customer::fromArray($data['customer']) : null;
 
         return $instance;

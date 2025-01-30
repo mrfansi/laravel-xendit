@@ -12,6 +12,9 @@ use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
  */
 class InvoiceData extends AbstractDataTransferObject
 {
+    public const MAX_EXTERNAL_ID_LENGTH = 255;
+    public const MAX_METADATA_KEYS = 50;
+
     /**
      * @param  string|null  $id  Invoice ID from Xendit
      * @param  string|null  $externalId  External ID for the invoice
@@ -34,6 +37,7 @@ class InvoiceData extends AbstractDataTransferObject
      * @param  bool|null  $shouldExcludeCreditCard  Whether to exclude credit card payments
      * @param  bool|null  $shouldSendEmail  Whether to send email notification
      * @param  array<string, mixed>|null  $metadata  Additional metadata
+     * @throws \InvalidArgumentException
      */
     public function __construct(
         public ?string $id = null,
@@ -57,5 +61,34 @@ class InvoiceData extends AbstractDataTransferObject
         public ?bool $shouldExcludeCreditCard = null,
         public ?bool $shouldSendEmail = null,
         public ?array $metadata = null,
-    ) {}
+    ) {
+        if ($externalId !== null) {
+            if (strlen($externalId) === 0) {
+                throw new \InvalidArgumentException('external_id must be between 1 and ' . self::MAX_EXTERNAL_ID_LENGTH . ' characters');
+            }
+            if (strlen($externalId) > self::MAX_EXTERNAL_ID_LENGTH) {
+                throw new \InvalidArgumentException('external_id must be between 1 and ' . self::MAX_EXTERNAL_ID_LENGTH . ' characters');
+            }
+        }
+
+        if ($merchantProfilePictureUrl !== null && !filter_var($merchantProfilePictureUrl, FILTER_VALIDATE_URL)) {
+            throw new \InvalidArgumentException('merchant_profile_picture_url must be a valid URL');
+        }
+
+        if ($invoiceUrl !== null && !filter_var($invoiceUrl, FILTER_VALIDATE_URL)) {
+            throw new \InvalidArgumentException('invoice_url must be a valid URL');
+        }
+
+        if ($metadata !== null) {
+            if (count($metadata) > self::MAX_METADATA_KEYS) {
+                throw new \InvalidArgumentException('metadata cannot have more than ' . self::MAX_METADATA_KEYS . ' keys');
+            }
+
+            foreach ($metadata as $key => $value) {
+                if (strlen($key) > 128) {
+                    throw new \InvalidArgumentException('metadata key cannot exceed 128 characters');
+                }
+            }
+        }
+    }
 }

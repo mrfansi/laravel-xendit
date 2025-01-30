@@ -39,6 +39,16 @@ abstract class AbstractDataTransferObject implements DataTransferObject
     }
 
     /**
+     * Alias for toArray()
+     *
+     * @return array<string, mixed>
+     */
+    public function all(): array
+    {
+        return $this->toArray();
+    }
+
+    /**
      * Create DTO from array
      *
      * @param  array<string, mixed>  $data

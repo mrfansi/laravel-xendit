@@ -117,7 +117,7 @@ class InvoiceParams extends AbstractDataTransferObject
         }
 
         if ($this->statuses !== null) {
-            $params['statuses'] = $this->statuses;
+            $params['statuses'] = array_map(fn ($status) => $status->value, $this->statuses);
         }
 
         if ($this->limit !== null) {
@@ -153,11 +153,11 @@ class InvoiceParams extends AbstractDataTransferObject
         }
 
         if ($this->client_types !== null) {
-            $params['client_types'] = $this->client_types;
+            $params['client_types'] = array_map(fn ($type) => $type->value, $this->client_types);
         }
 
         if ($this->payment_channels !== null) {
-            $params['payment_channels'] = $this->payment_channels;
+            $params['payment_channels'] = array_map(fn ($channel) => $channel->value, $this->payment_channels);
         }
 
         if ($this->on_demand_link !== null) {

@@ -13,35 +13,21 @@ use ReflectionClass;
 class InstallmentConfiguration extends AbstractDataTransferObject
 {
     /**
-     * @param  array<AllowedTerm>|null  $allowedTerms  List of allowed installment terms
-     * @param  float|null  $minAmount  Minimum amount for installment
-     * @param  float|null  $maxAmount  Maximum amount for installment
-     * @param  array<string>|null  $allowedIssuers  List of allowed card issuers
+     * @param  bool|null  $allow_installment  Whether to allow installment payments
+     * @param  bool|null  $allow_full_payment  Whether to allow full payment
+     * @param  array<AllowedTerm>|null  $allowed_terms  List of allowed installment terms
+     * @param  float|null  $min_amount  Minimum amount for installment
+     * @param  float|null  $max_amount  Maximum amount for installment
+     * @param  array<string>|null  $allowed_issuers  List of allowed card issuers
      */
     public function __construct(
-        public ?array $allowedTerms = null,
-        public ?float $minAmount = null,
-        public ?float $maxAmount = null,
-        public ?array $allowedIssuers = null,
+        public ?bool $allow_installment = true,
+        public ?bool $allow_full_payment = true,
+        public ?array $allowed_terms = null,
+        public ?float $min_amount = null,
+        public ?float $max_amount = null,
+        public ?array $allowed_issuers = null,
     ) {}
-
-    /**
-     * Create an instance from array data
-     *
-     * @param  array<string, mixed>|null  $data
-     */
-    public static function from(?array $data): ?static
-    {
-        if ($data === null) {
-            return null;
-        }
-
-        if (isset($data['allowed_terms']) && is_array($data['allowed_terms'])) {
-            $data['allowed_terms'] = array_map(fn ($term) => AllowedTerm::fromArray($term), $data['allowed_terms']);
-        }
-
-        return static::fromArray($data);
-    }
 
     /**
      * Create an instance from array data
@@ -53,10 +39,12 @@ class InstallmentConfiguration extends AbstractDataTransferObject
         /** @var static */
         $instance = (new ReflectionClass(static::class))->newInstance();
 
-        $instance->allowedTerms = $data['allowed_terms'] ?? null;
-        $instance->minAmount = $data['min_amount'] ?? null;
-        $instance->maxAmount = $data['max_amount'] ?? null;
-        $instance->allowedIssuers = $data['allowed_issuers'] ?? null;
+        $instance->allow_installment = $data['allow_installment'] ?? true;
+        $instance->allow_full_payment = $data['allow_full_payment'] ?? true;
+        $instance->allowed_terms = isset($data['allowed_terms']) ? array_map(fn ($term) => AllowedTerm::fromArray($term), $data['allowed_terms']) : null;
+        $instance->min_amount = $data['min_amount'] ?? null;
+        $instance->max_amount = $data['max_amount'] ?? null;
+        $instance->allowed_issuers = $data['allowed_issuers'] ?? null;
 
         return $instance;
     }
