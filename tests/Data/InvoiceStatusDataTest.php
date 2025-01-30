@@ -13,7 +13,7 @@ test('invoice status data can be created with values', function () {
 });
 
 test('invoice status data can be created with null values', function () {
-    $data = new InvoiceStatusData();
+    $data = new InvoiceStatusData;
 
     expect($data)
         ->status->toBeNull();

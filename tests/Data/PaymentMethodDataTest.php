@@ -15,7 +15,7 @@ test('payment method data can be created with values', function () {
 });
 
 test('payment method data can be created with null values', function () {
-    $data = new PaymentMethodData();
+    $data = new PaymentMethodData;
 
     expect($data)
         ->type->toBeNull()

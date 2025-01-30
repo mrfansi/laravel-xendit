@@ -15,7 +15,7 @@ test('payment details can be created with values', function () {
 });
 
 test('payment details can be created with null values', function () {
-    $details = new PaymentDetails();
+    $details = new PaymentDetails;
 
     expect($details)
         ->receipt_id->toBeNull()
