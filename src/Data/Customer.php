@@ -26,4 +26,21 @@ class Customer extends AbstractDataTransferObject
         /** @var Address[]|null */
         public ?array $addresses = null,
     ) {}
+
+    /**
+     * Create Customer from array with proper handling of Address objects
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public static function fromArray(array $data): static
+    {
+        if (isset($data['addresses']) && is_array($data['addresses'])) {
+            $data['addresses'] = array_map(
+                fn (array $address) => $address instanceof Address ? $address : Address::fromArray($address),
+                $data['addresses']
+            );
+        }
+
+        return parent::fromArray($data);
+    }
 }
