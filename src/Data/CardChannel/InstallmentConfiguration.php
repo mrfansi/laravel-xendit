@@ -3,6 +3,7 @@
 namespace Mrfansi\Xendit\Data\CardChannel;
 
 use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
+use ReflectionClass;
 
 /**
  * Class InstallmentConfiguration
@@ -49,11 +50,14 @@ class InstallmentConfiguration extends AbstractDataTransferObject
      */
     public static function fromArray(array $data): static
     {
-        return new static(
-            allowedTerms: $data['allowed_terms'] ?? null,
-            minAmount: $data['min_amount'] ?? null,
-            maxAmount: $data['max_amount'] ?? null,
-            allowedIssuers: $data['allowed_issuers'] ?? null,
-        );
+        /** @var static */
+        $instance = (new ReflectionClass(static::class))->newInstance();
+
+        $instance->allowedTerms = $data['allowed_terms'] ?? null;
+        $instance->minAmount = $data['min_amount'] ?? null;
+        $instance->maxAmount = $data['max_amount'] ?? null;
+        $instance->allowedIssuers = $data['allowed_issuers'] ?? null;
+
+        return $instance;
     }
 }

@@ -4,6 +4,7 @@ namespace Mrfansi\Xendit\Data\Abstracts;
 
 use Mrfansi\Xendit\Data\Contracts\DataTransferObject;
 use ReflectionClass;
+use ReflectionNamedType;
 use ReflectionProperty;
 
 abstract class AbstractDataTransferObject implements DataTransferObject
@@ -41,10 +42,12 @@ abstract class AbstractDataTransferObject implements DataTransferObject
      * Create DTO from array
      *
      * @param  array<string, mixed>  $data
+     * @return static
      */
     public static function fromArray(array $data): static
     {
-        $instance = new static;
+        /** @var static */
+        $instance = (new ReflectionClass(static::class))->newInstance();
         $reflection = new ReflectionClass($instance);
         $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
 
@@ -57,7 +60,7 @@ abstract class AbstractDataTransferObject implements DataTransferObject
             $value = $data[$name];
             $type = $property->getType();
 
-            if ($type && ! $type->isBuiltin()) {
+            if ($type instanceof ReflectionNamedType && ! $type->isBuiltin()) {
                 $className = $type->getName();
                 if (is_subclass_of($className, DataTransferObject::class)) {
                     $instance->{$name} = $className::fromArray($value);

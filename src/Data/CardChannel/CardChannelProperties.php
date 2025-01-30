@@ -3,6 +3,7 @@
 namespace Mrfansi\Xendit\Data\CardChannel;
 
 use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
+use ReflectionClass;
 
 /**
  * Class CardChannelProperties
@@ -51,10 +52,13 @@ class CardChannelProperties extends AbstractDataTransferObject
      */
     public static function fromArray(array $data): static
     {
-        return new static(
-            skipThreeDSecure: $data['skip_three_d_secure'] ?? null,
-            allowedTerms: $data['allowed_terms'] ?? null,
-            installmentConfiguration: $data['installment_configuration'] ?? null,
-        );
+        /** @var static */
+        $instance = (new ReflectionClass(static::class))->newInstance();
+
+        $instance->skipThreeDSecure = $data['skip_three_d_secure'] ?? null;
+        $instance->allowedTerms = $data['allowed_terms'] ?? null;
+        $instance->installmentConfiguration = $data['installment_configuration'] ?? null;
+
+        return $instance;
     }
 }

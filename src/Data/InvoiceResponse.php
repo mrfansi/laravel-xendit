@@ -6,9 +6,11 @@ use Carbon\Carbon;
 use DateTimeInterface;
 use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 use Mrfansi\Xendit\Data\CardChannel\CardChannelProperties;
+use Mrfansi\Xendit\Data\Customer;
 use Mrfansi\Xendit\Enums\Currency;
 use Mrfansi\Xendit\Enums\InvoiceStatus;
 use Mrfansi\Xendit\Traits\EnumToArray;
+use ReflectionClass;
 
 class InvoiceResponse extends AbstractDataTransferObject
 {
@@ -50,6 +52,7 @@ class InvoiceResponse extends AbstractDataTransferObject
      * @param  bool|null  $should_authenticate_credit_card  Should authenticate credit card payment
      * @param  CardChannelProperties|null  $channel_properties  Channel properties
      * @param  array|null  $metadata  Additional metadata
+     * @param  Customer|null  $customer  Customer information
      */
     public function __construct(
         public ?string $id = null,
@@ -85,44 +88,60 @@ class InvoiceResponse extends AbstractDataTransferObject
         public ?bool $should_authenticate_credit_card = null,
         public ?CardChannelProperties $channel_properties = null,
         public ?array $metadata = null,
+        public ?Customer $customer = null,
     ) {}
 
-    public static function fromArray(array $data): self
+    /**
+     * Create an instance from array data
+     *
+     * @param  array<string, mixed>|null  $data
+     * @return static|null
+     */
+    public static function from(?array $data): ?static
     {
-        return new self(
-            id: $data['id'] ?? null,
-            external_id: $data['external_id'] ?? null,
-            user_id: $data['user_id'] ?? null,
-            status: $data['status'] ? InvoiceStatus::from($data['status']) : null,
-            merchant_name: $data['merchant_name'] ?? null,
-            merchant_profile_picture_url: $data['merchant_profile_picture_url'] ?? null,
-            amount: $data['amount'] ?? null,
-            payer_email: $data['payer_email'] ?? null,
-            description: $data['description'] ?? null,
-            invoice_url: $data['invoice_url'] ?? null,
-            expiry_date: $data['expiry_date'] ? Carbon::createFromFormat('Y-m-d H:i:s', $data['expiry_date']) : null,
-            available_banks: $data['available_banks'] ?? null,
-            available_retail_outlets: $data['available_retail_outlets'] ?? null,
-            available_ewallets: $data['available_ewallets'] ?? null,
-            available_qr_codes: $data['available_qr_codes'] ?? null,
-            available_direct_debits: $data['available_direct_debits'] ?? null,
-            available_paylaters: $data['available_paylaters'] ?? null,
-            should_exclude_credit_card: $data['should_exclude_credit_card'] ?? null,
-            should_send_email: $data['should_send_email'] ?? null,
-            mid_label: $data['mid_label'] ?? null,
-            currency: $data['currency'] ? Currency::from($data['currency']) : null,
-            success_redirect_url: $data['success_redirect_url'] ?? null,
-            failure_redirect_url: $data['failure_redirect_url'] ?? null,
-            payment_methods: $data['payment_methods'] ?? null,
-            fixed_va: $data['fixed_va'] ?? null,
-            items: $data['items'] ?? null,
-            fees: $data['fees'] ?? null,
-            payment_details: $data['payment_details'] ?? null,
-            should_authenticate_credit_card: $data['should_authenticate_credit_card'] ?? null,
-            channel_properties: $data['channel_properties'] ? CardChannelProperties::fromArray($data['channel_properties']) : null,
-            metadata: $data['metadata'] ?? null,
-            updated: $data['updated'] ? Carbon::createFromFormat('Y-m-d H:i:s', $data['updated']) : null,
-            created: $data['created'] ? Carbon::createFromFormat('Y-m-d H:i:s', $data['created']) : null,
-        );
+        if ($data === null) {
+            return null;
+        }
+
+        return static::fromArray($data);
+    }
+
+    /**
+     * Create an instance from array data
+     *
+     * @param  array<string, mixed>  $data
+     * @return static
+     */
+    public static function fromArray(array $data): static
+    {
+        /** @var static */
+        $instance = (new ReflectionClass(static::class))->newInstance();
+        
+        $instance->id = $data['id'] ?? null;
+        $instance->external_id = $data['external_id'] ?? null;
+        $instance->user_id = $data['user_id'] ?? null;
+        $instance->status = $data['status'] ? InvoiceStatus::from($data['status']) : null;
+        $instance->merchant_name = $data['merchant_name'] ?? null;
+        $instance->merchant_profile_picture_url = $data['merchant_profile_picture_url'] ?? null;
+        $instance->amount = $data['amount'] ?? null;
+        $instance->payer_email = $data['payer_email'] ?? null;
+        $instance->description = $data['description'] ?? null;
+        $instance->invoice_url = $data['invoice_url'] ?? null;
+        $instance->expiry_date = isset($data['expiry_date']) ? Carbon::parse($data['expiry_date']) : null;
+        $instance->available_banks = $data['available_banks'] ?? null;
+        $instance->available_retail_outlets = $data['available_retail_outlets'] ?? null;
+        $instance->available_ewallets = $data['available_ewallets'] ?? null;
+        $instance->available_qr_codes = $data['available_qr_codes'] ?? null;
+        $instance->available_direct_debits = $data['available_direct_debits'] ?? null;
+        $instance->available_paylaters = $data['available_paylaters'] ?? null;
+        $instance->should_exclude_credit_card = $data['should_exclude_credit_card'] ?? null;
+        $instance->should_send_email = $data['should_send_email'] ?? null;
+        $instance->created = isset($data['created']) ? Carbon::parse($data['created']) : null;
+        $instance->updated = isset($data['updated']) ? Carbon::parse($data['updated']) : null;
+        $instance->currency = isset($data['currency']) ? Currency::from($data['currency']) : null;
+        $instance->items = isset($data['items']) ? array_map(fn ($item) => Item::fromArray($item), $data['items']) : null;
+        $instance->customer = isset($data['customer']) ? Customer::fromArray($data['customer']) : null;
+
+        return $instance;
     }
 }

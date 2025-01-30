@@ -102,4 +102,72 @@ class InvoiceParams extends AbstractDataTransferObject
             }
         }
     }
+
+    /**
+     * Get all parameters as an array for query string
+     *
+     * @return array<string, mixed>
+     */
+    public function all(): array
+    {
+        $params = [];
+
+        if ($this->external_id !== null) {
+            $params['external_id'] = $this->external_id;
+        }
+
+        if ($this->statuses !== null) {
+            $params['statuses'] = $this->statuses;
+        }
+
+        if ($this->limit !== null) {
+            $params['limit'] = $this->limit;
+        }
+
+        if ($this->created_after !== null) {
+            $params['created_after'] = $this->created_after->format('c');
+        }
+
+        if ($this->created_before !== null) {
+            $params['created_before'] = $this->created_before->format('c');
+        }
+
+        if ($this->paid_after !== null) {
+            $params['paid_after'] = $this->paid_after->format('c');
+        }
+
+        if ($this->paid_before !== null) {
+            $params['paid_before'] = $this->paid_before->format('c');
+        }
+
+        if ($this->expired_after !== null) {
+            $params['expired_after'] = $this->expired_after->format('c');
+        }
+
+        if ($this->expired_before !== null) {
+            $params['expired_before'] = $this->expired_before->format('c');
+        }
+
+        if ($this->last_invoice_id !== null) {
+            $params['last_invoice_id'] = $this->last_invoice_id;
+        }
+
+        if ($this->client_types !== null) {
+            $params['client_types'] = $this->client_types;
+        }
+
+        if ($this->payment_channels !== null) {
+            $params['payment_channels'] = $this->payment_channels;
+        }
+
+        if ($this->on_demand_link !== null) {
+            $params['on_demand_link'] = $this->on_demand_link;
+        }
+
+        if ($this->recurring_payment_id !== null) {
+            $params['recurring_payment_id'] = $this->recurring_payment_id;
+        }
+
+        return $params;
+    }
 }
