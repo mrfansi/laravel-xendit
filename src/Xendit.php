@@ -105,7 +105,7 @@ class Xendit implements XenditFactory
         }
 
         $this->client = Http::baseUrl(config('xendit.endpoint'))
-            ->withBasicAuth(config('xendit.secret_key'),'')
+            ->withBasicAuth(config('xendit.secret_key'), '')
             ->withHeaders($headers)
             ->throw();
     }

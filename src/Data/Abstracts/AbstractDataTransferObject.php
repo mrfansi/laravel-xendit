@@ -10,7 +10,7 @@ abstract class AbstractDataTransferObject implements DataTransferObject
 {
     /**
      * Convert DTO to array
-     * 
+     *
      * @return array<string, mixed>
      */
     public function toArray(): array
@@ -39,29 +39,29 @@ abstract class AbstractDataTransferObject implements DataTransferObject
 
     /**
      * Create DTO from array
-     * 
-     * @param array<string, mixed> $data
-     * @return static
+     *
+     * @param  array<string, mixed>  $data
      */
     public static function fromArray(array $data): static
     {
-        $instance = new static();
+        $instance = new static;
         $reflection = new ReflectionClass($instance);
         $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
 
         foreach ($properties as $property) {
             $name = $property->getName();
-            if (!array_key_exists($name, $data)) {
+            if (! array_key_exists($name, $data)) {
                 continue;
             }
 
             $value = $data[$name];
             $type = $property->getType();
-            
-            if ($type && !$type->isBuiltin()) {
+
+            if ($type && ! $type->isBuiltin()) {
                 $className = $type->getName();
                 if (is_subclass_of($className, DataTransferObject::class)) {
                     $instance->{$name} = $className::fromArray($value);
+
                     continue;
                 }
             }

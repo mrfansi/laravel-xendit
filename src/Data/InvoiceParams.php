@@ -8,7 +8,7 @@ use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 
 /**
  * Class InvoiceParams
- * 
+ *
  * Represents parameters for creating or updating an invoice
  */
 class InvoiceParams extends AbstractDataTransferObject
@@ -16,20 +16,20 @@ class InvoiceParams extends AbstractDataTransferObject
     /**
      * Initialize a new instance of InvoiceParams
      *
-     * @param string|null $external_id The external ID used during generation of invoice
-     * @param array|null $statuses Status of the invoices to filter
-     * @param int|null $limit Number of invoices to return (1-100)
-     * @param DateTimeInterface|null $created_after Filter invoices created after this datetime
-     * @param DateTimeInterface|null $created_before Filter invoices created before this datetime
-     * @param DateTimeInterface|null $paid_after Filter invoices paid after this datetime
-     * @param DateTimeInterface|null $paid_before Filter invoices paid before this datetime
-     * @param DateTimeInterface|null $expired_after Filter invoices expiring after this datetime
-     * @param DateTimeInterface|null $expired_before Filter invoices expiring before this datetime
-     * @param string|null $last_invoice_id Cursor for pagination (invoice ID)
-     * @param array|null $client_types Methods used to create the invoices
-     * @param array|null $payment_channels Payment channels used
-     * @param string|null $on_demand_link Filter by specific on-demand link
-     * @param string|null $recurring_payment_id Filter by specific recurring payment ID
+     * @param  string|null  $external_id  The external ID used during generation of invoice
+     * @param  array|null  $statuses  Status of the invoices to filter
+     * @param  int|null  $limit  Number of invoices to return (1-100)
+     * @param  DateTimeInterface|null  $created_after  Filter invoices created after this datetime
+     * @param  DateTimeInterface|null  $created_before  Filter invoices created before this datetime
+     * @param  DateTimeInterface|null  $paid_after  Filter invoices paid after this datetime
+     * @param  DateTimeInterface|null  $paid_before  Filter invoices paid before this datetime
+     * @param  DateTimeInterface|null  $expired_after  Filter invoices expiring after this datetime
+     * @param  DateTimeInterface|null  $expired_before  Filter invoices expiring before this datetime
+     * @param  string|null  $last_invoice_id  Cursor for pagination (invoice ID)
+     * @param  array|null  $client_types  Methods used to create the invoices
+     * @param  array|null  $payment_channels  Payment channels used
+     * @param  string|null  $on_demand_link  Filter by specific on-demand link
+     * @param  string|null  $recurring_payment_id  Filter by specific recurring payment ID
      */
     public function __construct(
         public ?string $external_id = null,
@@ -46,8 +46,7 @@ class InvoiceParams extends AbstractDataTransferObject
         public ?array $payment_channels = null,
         public ?string $on_demand_link = null,
         public ?string $recurring_payment_id = null,
-    )
-    {
+    ) {
         $this->validateParams();
     }
 

@@ -4,11 +4,11 @@ namespace Mrfansi\Xendit\Data;
 
 use Carbon\Carbon;
 use DateTimeInterface;
+use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 use Mrfansi\Xendit\Data\CardChannel\CardChannelProperties;
 use Mrfansi\Xendit\Enums\Currency;
 use Mrfansi\Xendit\Enums\InvoiceStatus;
 use Mrfansi\Xendit\Traits\EnumToArray;
-use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 
 class InvoiceResponse extends AbstractDataTransferObject
 {
@@ -90,7 +90,7 @@ class InvoiceResponse extends AbstractDataTransferObject
     public static function fromArray(array $data): self
     {
         return new self(
-           id: $data['id'] ?? null,
+            id: $data['id'] ?? null,
             external_id: $data['external_id'] ?? null,
             user_id: $data['user_id'] ?? null,
             status: $data['status'] ? InvoiceStatus::from($data['status']) : null,

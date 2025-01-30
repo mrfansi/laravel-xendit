@@ -6,30 +6,28 @@ use Mrfansi\Xendit\Data\AbstractDataTransferObject;
 
 /**
  * Class InstallmentConfiguration
- * 
+ *
  * Represents configuration for installment payments
  */
 class InstallmentConfiguration extends AbstractDataTransferObject
 {
     /**
-     * @param array<AllowedTerm>|null $allowedTerms List of allowed installment terms
-     * @param float|null $minAmount Minimum amount for installment
-     * @param float|null $maxAmount Maximum amount for installment
-     * @param array<string>|null $allowedIssuers List of allowed card issuers
+     * @param  array<AllowedTerm>|null  $allowedTerms  List of allowed installment terms
+     * @param  float|null  $minAmount  Minimum amount for installment
+     * @param  float|null  $maxAmount  Maximum amount for installment
+     * @param  array<string>|null  $allowedIssuers  List of allowed card issuers
      */
     public function __construct(
         public ?array $allowedTerms = null,
         public ?float $minAmount = null,
         public ?float $maxAmount = null,
         public ?array $allowedIssuers = null,
-    ) {
-    }
+    ) {}
 
     /**
      * Create an instance from array data
-     * 
-     * @param array<string, mixed>|null $data
-     * @return static|null
+     *
+     * @param  array<string, mixed>|null  $data
      */
     public static function from(?array $data): ?static
     {
@@ -46,9 +44,8 @@ class InstallmentConfiguration extends AbstractDataTransferObject
 
     /**
      * Create an instance from array data
-     * 
-     * @param array<string, mixed> $data
-     * @return static
+     *
+     * @param  array<string, mixed>  $data
      */
     public static function fromArray(array $data): static
     {
