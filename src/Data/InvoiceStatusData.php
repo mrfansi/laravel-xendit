@@ -2,6 +2,8 @@
 
 namespace Mrfansi\Xendit\Data;
 
+use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
+
 /**
  * Class InvoiceStatusData
  *

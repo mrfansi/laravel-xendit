@@ -2,7 +2,7 @@
 
 namespace Mrfansi\Xendit\Data;
 
-use Spatie\LaravelData\AbstractDataTransferObject;
+use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 
 /**
  * Class Item

@@ -2,7 +2,7 @@
 
 namespace Mrfansi\Xendit\Data;
 
-use Mrfansi\Xendit\AbstractDataTransferObject;
+use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 
 /**
  * Class NotificationPreference
