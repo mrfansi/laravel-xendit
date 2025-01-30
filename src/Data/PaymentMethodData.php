@@ -2,22 +2,22 @@
 
 namespace Mrfansi\Xendit\Data;
 
-use Mrfansi\Xendit\Enums\PaymentMethod;
-use Spatie\LaravelData\Data;
+use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 
-class PaymentMethodData extends Data
+/**
+ * Class PaymentMethodData
+ * 
+ * Represents payment method data with type and reusability information
+ */
+class PaymentMethodData extends AbstractDataTransferObject
 {
+    /**
+     * @param string|null $type Payment method type (e.g., 'CARD', 'VIRTUAL_ACCOUNT', etc.)
+     * @param bool|null $reusability Whether the payment method can be reused
+     */
     public function __construct(
-        public PaymentMethod $method
-    ) {}
-
-    public static function fromEnum(PaymentMethod $method): self
-    {
-        return new self($method);
-    }
-
-    public function toEnum(): PaymentMethod
-    {
-        return $this->method;
+        public ?string $type = null,
+        public ?bool $reusability = null,
+    ) {
     }
 }

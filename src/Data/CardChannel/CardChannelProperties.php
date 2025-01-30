@@ -2,38 +2,62 @@
 
 namespace Mrfansi\Xendit\Data\CardChannel;
 
-use Spatie\LaravelData\Data;
+use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 
-class CardChannelProperties extends Data
+/**
+ * Class CardChannelProperties
+ * 
+ * Represents properties specific to card payment channel
+ */
+class CardChannelProperties extends AbstractDataTransferObject
 {
     /**
-     * Constructor for CardChannelProperties.
-     *
-     * @param  string[]|null  $allowed_bins  Credit card BINs that will be accepted (6 or 8 digits)
-     * @param  InstallmentConfiguration|null  $installment_configuration  Installment configuration
+     * @param string|null $skipThreeDSecure Whether to skip 3D Secure authentication
+     * @param array<AllowedTerm>|null $allowedTerms List of allowed installment terms
+     * @param InstallmentConfiguration|null $installmentConfiguration Configuration for installment payments
      */
     public function __construct(
-        /**
-         * Credit card BINs that will be accepted (6 or 8 digits)
-         *
-         * @var string[]|null
-         */
-        public ?array $allowed_bins = null,
-
-        /**
-         * Installment configuration
-         */
-        public ?InstallmentConfiguration $installment_configuration = null,
+        public ?string $skipThreeDSecure = null,
+        public ?array $allowedTerms = null,
+        public ?InstallmentConfiguration $installmentConfiguration = null,
     ) {
-        // Validate BIN lengths if provided
-        if ($this->allowed_bins !== null) {
-            foreach ($this->allowed_bins as $bin) {
-                if (! preg_match('/^\d{6}(\d{2})?$/', $bin)) {
-                    throw new \InvalidArgumentException(
-                        'Credit card BIN must be either 6 or 8 digits'
-                    );
-                }
-            }
+    }
+
+    /**
+     * Create an instance from array data
+     * 
+     * @param array<string, mixed>|null $data
+     * @return static|null
+     */
+    public static function from(?array $data): ?static
+    {
+        if ($data === null) {
+            return null;
         }
+
+        if (isset($data['allowed_terms']) && is_array($data['allowed_terms'])) {
+            $data['allowed_terms'] = array_map(fn ($term) => AllowedTerm::fromArray($term), $data['allowed_terms']);
+        }
+
+        if (isset($data['installment_configuration'])) {
+            $data['installment_configuration'] = InstallmentConfiguration::fromArray($data['installment_configuration']);
+        }
+
+        return static::fromArray($data);
+    }
+
+    /**
+     * Create an instance from array data
+     * 
+     * @param array<string, mixed> $data
+     * @return static
+     */
+    public static function fromArray(array $data): static
+    {
+        return new static(
+            skipThreeDSecure: $data['skip_three_d_secure'] ?? null,
+            allowedTerms: $data['allowed_terms'] ?? null,
+            installmentConfiguration: $data['installment_configuration'] ?? null,
+        );
     }
 }

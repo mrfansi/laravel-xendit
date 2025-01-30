@@ -9,10 +9,6 @@ trait EnumToArray
      */
     public function enumToArray($value): ?string
     {
-        if ($value === null) {
-            return null;
-        }
-
-        return $value->value;
+        return $value?->value;
     }
 }

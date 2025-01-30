@@ -2,39 +2,32 @@
 
 namespace Mrfansi\Xendit\Data;
 
-use Spatie\LaravelData\Data;
+use Spatie\LaravelData\AbstractDataTransferObject;
 
-class Item extends Data
+/**
+ * Class Item
+ * 
+ * Represents an item in an invoice or order with its details
+ */
+class Item extends AbstractDataTransferObject
 {
     /**
-     * Item constructor.
-     *
-     * @param  string  $name  Item name. The name of the item being purchased.
-     * @param  int  $quantity  Item quantity. The quantity of the item being purchased.
-     * @param  float  $price  Item price. The price of the item being purchased.
-     * @param  string|null  $category  Item category. The category of the item being purchased.
-     * @param  string|null  $url  Item URL. The URL to the item being purchased.
-     *
-     * @throws \InvalidArgumentException If any of the validation rules fail.
+     * @param string|null $name Name of the item
+     * @param int|null $quantity Quantity of the item
+     * @param float|null $price Price per unit of the item
+     * @param string|null $referenceId Reference ID for the item in your system
+     * @param string|null $url URL associated with the item (e.g., product page)
+     * @param string|null $category Category of the item
+     * @param string|null $description Additional description of the item
      */
     public function __construct(
-        public string $name,
-        public int $quantity,
-        public float $price,
-        public ?string $category = null,
+        public ?string $name = null,
+        public ?int $quantity = null,
+        public ?float $price = null,
+        public ?string $referenceId = null,
         public ?string $url = null,
+        public ?string $category = null,
+        public ?string $description = null,
     ) {
-        // Validation rules
-        if (strlen($name) > 256) {
-            throw new \InvalidArgumentException('Item name cannot exceed 256 characters');
-        }
-
-        if ($quantity > 510000) {
-            throw new \InvalidArgumentException('Item quantity cannot exceed 510000');
-        }
-
-        if ($url !== null && ! filter_var($url, FILTER_VALIDATE_URL)) {
-            throw new \InvalidArgumentException('Item URL must be a valid HTTP or HTTPS URL');
-        }
     }
 }

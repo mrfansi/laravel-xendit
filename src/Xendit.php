@@ -89,7 +89,6 @@ class Xendit implements XenditFactory
         $headers = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer '.config('xendit.secret_key'),
         ];
 
         // Add optional headers if set
@@ -106,6 +105,7 @@ class Xendit implements XenditFactory
         }
 
         $this->client = Http::baseUrl(config('xendit.endpoint'))
+            ->withBasicAuth(config('xendit.secret_key'),'')
             ->withHeaders($headers)
             ->throw();
     }

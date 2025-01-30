@@ -2,36 +2,27 @@
 
 namespace Mrfansi\Xendit\Data;
 
-use Mrfansi\Xendit\Enums\QrisSource;
-use Mrfansi\Xendit\Traits\EnumToArray;
-use Spatie\LaravelData\Data;
+use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
+use Mrfansi\Xendit\Data\PaymentMethodData;
 
-class PaymentDetails extends Data
+/**
+ * Class PaymentDetails
+ * 
+ * Represents payment details including receipt information and payment method
+ */
+class PaymentDetails extends AbstractDataTransferObject
 {
-    use EnumToArray;
-
-    public function __construct(
-        /**
-         * Request reference number (RRN) shared across QR network
-         */
-        public ?string $receipt_id = null,
-
-        /**
-         * Source where end user's balance was deducted
-         */
-        public ?QrisSource $source = null,
-    ) {}
-
     /**
-     * Convert the data to an array.
-     *
-     * @return array<string, mixed>
+     * @param string|null $receiptId Receipt ID of the payment
+     * @param string|null $source Source of the payment
+     * @param PaymentMethodData|null $paymentMethod Payment method used
+     * @param array<string, mixed>|null $metadata Additional metadata about the payment
      */
-    public function toArray(): array
-    {
-        return [
-            'receipt_id' => $this->receipt_id,
-            'source' => $this->enumToArray($this->source),
-        ];
+    public function __construct(
+        public ?string $receiptId = null,
+        public ?string $source = null,
+        public ?PaymentMethodData $paymentMethod = null,
+        public ?array $metadata = null,
+    ) {
     }
 }

@@ -5,25 +5,18 @@ namespace Mrfansi\Xendit\Data;
 use Mrfansi\Xendit\Enums\InvoiceStatus;
 use Spatie\LaravelData\Data;
 
-class InvoiceStatusData extends Data
+/**
+ * Class InvoiceStatusData
+ * 
+ * Represents the status of an invoice
+ */
+class InvoiceStatusData extends AbstractDataTransferObject
 {
+    /**
+     * @param string|null $status Current status of the invoice (e.g., 'PENDING', 'PAID', 'EXPIRED')
+     */
     public function __construct(
-        public InvoiceStatus $status
-    ) {}
-
-    /**
-     * Create a new instance of `InvoiceStatusData` from an `InvoiceStatus` enum.
-     */
-    public static function fromEnum(InvoiceStatus $status): static
-    {
-        return new self($status);
-    }
-
-    /**
-     * Return the underlying `InvoiceStatus` enum.
-     */
-    public function toEnum(): InvoiceStatus
-    {
-        return $this->status;
+        public ?string $status = null,
+    ) {
     }
 }

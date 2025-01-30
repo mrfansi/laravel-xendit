@@ -45,11 +45,11 @@ class Invoice
     public function all(InvoiceParams $params): Collection
     {
         try {
-            $response = $this->client->get('/v2/invoices', $params->toArray())->json();
-            $invoices = collect($response->json('data'))
-                ->map(fn (array $invoice) => InvoiceResponse::from($invoice));
-
-            return $invoices;
+            $response = $this->client->get('/v2/invoices', $params->all());
+            return collect($response->json())
+                ->map(function (array $invoice) {
+                    return InvoiceResponse::fromArray($invoice);
+                });
         } catch (Throwable $e) {
             Log::error('Failed to retrieve invoices', [
                 'error' => $e->getMessage(),

@@ -4,34 +4,36 @@ namespace Mrfansi\Xendit\Data;
 
 use DateTimeInterface;
 use InvalidArgumentException;
-use Spatie\LaravelData\Attributes\DataCollectionOf;
-use Spatie\LaravelData\Data;
-use Spatie\LaravelData\DataCollection;
+use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 
-class InvoiceParams extends Data
+/**
+ * Class InvoiceParams
+ * 
+ * Represents parameters for creating or updating an invoice
+ */
+class InvoiceParams extends AbstractDataTransferObject
 {
     /**
      * Initialize a new instance of InvoiceParams
      *
-     * @param  string|null  $external_id  The external ID used during generation of invoice
-     * @param  DataCollection<InvoiceStatusData>|null  $statuses  Status of the invoices to filter
-     * @param  int|null  $limit  Number of invoices to return (1-100)
-     * @param  DateTimeInterface|null  $created_after  Filter invoices created after this datetime
-     * @param  DateTimeInterface|null  $created_before  Filter invoices created before this datetime
-     * @param  DateTimeInterface|null  $paid_after  Filter invoices paid after this datetime
-     * @param  DateTimeInterface|null  $paid_before  Filter invoices paid before this datetime
-     * @param  DateTimeInterface|null  $expired_after  Filter invoices expiring after this datetime
-     * @param  DateTimeInterface|null  $expired_before  Filter invoices expiring before this datetime
-     * @param  string|null  $last_invoice_id  Cursor for pagination (invoice ID)
-     * @param  DataCollection<ClientTypeData>|null  $client_types  Methods used to create the invoices
-     * @param  DataCollection<PaymentMethodData>|null  $payment_channels  Payment channels used
-     * @param  string|null  $on_demand_link  Filter by specific on-demand link
-     * @param  string|null  $recurring_payment_id  Filter by specific recurring payment ID
+     * @param string|null $external_id The external ID used during generation of invoice
+     * @param array|null $statuses Status of the invoices to filter
+     * @param int|null $limit Number of invoices to return (1-100)
+     * @param DateTimeInterface|null $created_after Filter invoices created after this datetime
+     * @param DateTimeInterface|null $created_before Filter invoices created before this datetime
+     * @param DateTimeInterface|null $paid_after Filter invoices paid after this datetime
+     * @param DateTimeInterface|null $paid_before Filter invoices paid before this datetime
+     * @param DateTimeInterface|null $expired_after Filter invoices expiring after this datetime
+     * @param DateTimeInterface|null $expired_before Filter invoices expiring before this datetime
+     * @param string|null $last_invoice_id Cursor for pagination (invoice ID)
+     * @param array|null $client_types Methods used to create the invoices
+     * @param array|null $payment_channels Payment channels used
+     * @param string|null $on_demand_link Filter by specific on-demand link
+     * @param string|null $recurring_payment_id Filter by specific recurring payment ID
      */
     public function __construct(
         public ?string $external_id = null,
-        #[DataCollectionOf(InvoiceStatusData::class)]
-        public ?DataCollection $statuses = null,
+        public ?array $statuses = null,
         public ?int $limit = 10,
         public ?DateTimeInterface $created_after = null,
         public ?DateTimeInterface $created_before = null,
@@ -40,43 +42,13 @@ class InvoiceParams extends Data
         public ?DateTimeInterface $expired_after = null,
         public ?DateTimeInterface $expired_before = null,
         public ?string $last_invoice_id = null,
-        #[DataCollectionOf(ClientTypeData::class)]
-        public ?DataCollection $client_types = null,
-        #[DataCollectionOf(PaymentMethodData::class)]
-        public ?DataCollection $payment_channels = null,
+        public ?array $client_types = null,
+        public ?array $payment_channels = null,
         public ?string $on_demand_link = null,
         public ?string $recurring_payment_id = null,
-    ) {
-        $this->validateParams();
-    }
-
-    public function all(): array
+    )
     {
-        $data = parent::all();
-
-        // Convert DataCollections to arrays of enum values
-        if ($this->statuses) {
-            $data['statuses'] = array_map(
-                fn (InvoiceStatusData $status) => $status->status->value,
-                $this->statuses->items()
-            );
-        }
-
-        if ($this->client_types) {
-            $data['client_types'] = array_map(
-                fn (ClientTypeData $type) => $type->type->value,
-                $this->client_types->items()
-            );
-        }
-
-        if ($this->payment_channels) {
-            $data['payment_channels'] = array_map(
-                fn (PaymentMethodData $method) => $method->method->value,
-                $this->payment_channels->items()
-            );
-        }
-
-        return $data;
+        $this->validateParams();
     }
 
     /**

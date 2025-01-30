@@ -2,10 +2,10 @@
 
 namespace Mrfansi\Xendit\Data;
 
+use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
 use Mrfansi\Xendit\Enums\ClientType;
-use Spatie\LaravelData\Data;
 
-class ClientTypeData extends Data
+class ClientTypeData extends AbstractDataTransferObject
 {
     /**
      * Construct a new ClientTypeData instance.
