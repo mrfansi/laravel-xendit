@@ -3,13 +3,11 @@
 namespace Mrfansi\LaravelXendit;
 
 use Mrfansi\LaravelXendit\Commands\InvoiceCommand;
-use Mrfansi\LaravelXendit\Contracts\XenditFactoryInterface;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class XenditServiceProvider extends PackageServiceProvider
 {
-
     public function configurePackage(Package $package): void
     {
         /*

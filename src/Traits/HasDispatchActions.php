@@ -6,7 +6,6 @@ use InvalidArgumentException;
 
 trait HasDispatchActions
 {
-
     /**
      * Dispatch action based on command argument
      *
@@ -14,9 +13,9 @@ trait HasDispatchActions
      */
     private function dispatchAction(string $action): void
     {
-        if (!in_array($action, $this->actions)) {
+        if (! in_array($action, $this->actions)) {
             throw new InvalidArgumentException(
-                'Invalid action. Use: ' . implode(', ', $this->actions)
+                'Invalid action. Use: '.implode(', ', $this->actions)
             );
         }
 

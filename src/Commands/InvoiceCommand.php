@@ -10,14 +10,14 @@ use Mrfansi\LaravelXendit\Traits\HasDispatchActions;
 use Mrfansi\LaravelXendit\Xendit;
 use RuntimeException;
 use Throwable;
-use function Laravel\Prompts\spin;
 
+use function Laravel\Prompts\spin;
 
 class InvoiceCommand extends Command
 {
     use HasDispatchActions;
 
-    public array $actions = ["all", "find", "new", "expire"];
+    public array $actions = ['all', 'find', 'new', 'expire'];
 
     public $signature = 'xendit:invoice
                          {action=all : Action to perform (all/find/new/expire)}
@@ -42,11 +42,11 @@ class InvoiceCommand extends Command
             $action = $this->argument('action');
             $this->dispatchAction($action);
         } catch (InvalidArgumentException $e) {
-            $this->error('[INVALID_INPUT] ' . $e->getMessage());
+            $this->error('[INVALID_INPUT] '.$e->getMessage());
         } catch (RuntimeException $e) {
-            $this->error('[API_ERROR] ' . $e->getMessage());
+            $this->error('[API_ERROR] '.$e->getMessage());
         } catch (Throwable $e) {
-            $this->error('[UNEXPECTED_ERROR] ' . $e->getMessage());
+            $this->error('[UNEXPECTED_ERROR] '.$e->getMessage());
             if (app()->environment('local')) {
                 $this->error($e->getTraceAsString());
             }
@@ -57,7 +57,7 @@ class InvoiceCommand extends Command
     {
         /** @var Collection<InvoiceResponse> $invoices */
         $invoices = spin(
-            fn() => $this->xendit->invoice()
+            fn () => $this->xendit->invoice()
                 ->all(),
             'Fetching invoices...'
         );
