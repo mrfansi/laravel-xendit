@@ -27,7 +27,9 @@ class Xendit implements XenditFactory
     private ?string $withSplitRule = null;
 
     /**
-     * A unique key to prevent processing duplicate requests. Can be your reference_id or any GUID. Must be unique across development and production environments.
+     * A unique key to prevent processing duplicate requests.
+     * Can be your reference_id or any GUID.
+     * It Must be unique across development and production environments.
      */
     private ?string $idempotencyKey = null;
 
@@ -71,7 +73,9 @@ class Xendit implements XenditFactory
     /**
      * Sets the idempotency key header for preventing duplicate requests.
      *
-     * @param  string  $idempotencyKey  The unique key to prevent processing duplicate requests. Can be your reference_id or any GUID. Must be unique across development and production environments.
+     * @param  string  $idempotencyKey  The unique key to prevent processing duplicate requests.
+     * Can be your reference_id or any GUID.
+     * It Must be unique across development and production environments.
      */
     public function withIdempotencyKey(string $idempotencyKey): self
     {

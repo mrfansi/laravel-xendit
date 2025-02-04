@@ -158,7 +158,7 @@ class Invoice
     }
 
     /**
-     * Handle exception and convert to appropriate type
+     * Handle exception and convert to the appropriate type
      *
      * @param  Throwable  $e  Exception to handle
      * @return Throwable Converted exception
