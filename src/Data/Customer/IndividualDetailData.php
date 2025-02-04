@@ -11,7 +11,5 @@ class IndividualDetailData
         public ?string $placeOfBirth = null,
         public ?string $dateOfBirth = null,
         public ?string $gender = null,
-    )
-    {
-    }
+    ) {}
 }
