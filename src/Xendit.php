@@ -6,11 +6,11 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
 use Mrfansi\LaravelXendit\Contracts\HttpClientFactory;
-use Mrfansi\LaravelXendit\Contracts\XenditFactory;
-use Mrfansi\LaravelXendit\Xendit\Invoice;
+use Mrfansi\LaravelXendit\Contracts\XenditFactoryInterface;
+use Mrfansi\LaravelXendit\Actions\Invoice;
 use RuntimeException;
 
-class Xendit implements XenditFactory, HttpClientFactory
+class Xendit implements XenditFactoryInterface, HttpClientFactory
 {
     /**
      * HTTP client instance for making API requests

@@ -2,10 +2,10 @@
 
 namespace Mrfansi\LaravelXendit\Contracts;
 
-use Mrfansi\LaravelXendit\Xendit\Invoice;
+use Mrfansi\LaravelXendit\Actions\Invoice;
 use RuntimeException;
 
-interface XenditFactory
+interface XenditFactoryInterface
 {
     /**
      * Sets the for-user-id header for xenPlatform sub-account transactions

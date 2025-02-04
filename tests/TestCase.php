@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Mrfansi\\XenditFactory\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Mrfansi\\XenditFactoryInterface\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

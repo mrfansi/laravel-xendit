@@ -2,12 +2,14 @@
 
 namespace Mrfansi\LaravelXendit;
 
-use Mrfansi\LaravelXendit\Commands\XenditCommand;
+use Mrfansi\LaravelXendit\Commands\InvoiceCommand;
+use Mrfansi\LaravelXendit\Contracts\XenditFactoryInterface;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class XenditServiceProvider extends PackageServiceProvider
 {
+
     public function configurePackage(Package $package): void
     {
         /*
@@ -17,9 +19,9 @@ class XenditServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-xendit')
-            ->hasConfigFile()
+            ->hasConfigFile('xendit')
             ->hasViews()
             ->hasMigration('create_xendit_table')
-            ->hasCommand(XenditCommand::class);
+            ->hasCommand(InvoiceCommand::class);
     }
 }

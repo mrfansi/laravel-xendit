@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\LaravelXendit\Xendit;
+namespace Mrfansi\LaravelXendit\Actions;
 
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
