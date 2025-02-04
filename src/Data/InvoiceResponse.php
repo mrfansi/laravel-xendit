@@ -2,7 +2,4 @@
 
 namespace Mrfansi\LaravelXendit\Data;
 
-class InvoiceResponse extends InvoiceData
-{
-
-}
+class InvoiceResponse extends InvoiceData {}

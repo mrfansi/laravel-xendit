@@ -6,7 +6,6 @@ use Illuminate\Support\Collection;
 
 class CustomerData
 {
-
     public function __construct(
         public string $referenceId,
         public string $type,
@@ -17,9 +16,5 @@ class CustomerData
         public ?string $email = null,
         /** @var Collection<AddressData> */
         public ?array $addresses = null,
-    )
-    {
-
-    }
-
+    ) {}
 }

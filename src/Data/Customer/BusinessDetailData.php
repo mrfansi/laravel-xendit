@@ -11,8 +11,5 @@ class BusinessDetailData
         public ?string $natureOfBusiness,
         public ?string $businessDomicile,
         public ?string $dateOfRegistration,
-    )
-    {
-
-    }
+    ) {}
 }
