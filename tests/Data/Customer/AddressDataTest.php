@@ -26,7 +26,7 @@ test('it can be instantiated with all parameters', function () {
         streetLine1: 'Jalan Test No. 1',
         streetLine2: 'RT/RW 001/002',
         postalCode: '12345',
-        category: AddressCategory::HOME->value,
+        category: AddressCategory::HOME,
         isPrimary: true
     );
 
@@ -37,7 +37,7 @@ test('it can be instantiated with all parameters', function () {
     $this->assertEquals('Jalan Test No. 1', $address->streetLine1);
     $this->assertEquals('RT/RW 001/002', $address->streetLine2);
     $this->assertEquals('12345', $address->postalCode);
-    $this->assertEquals(AddressCategory::HOME->value, $address->category);
+    $this->assertEquals(AddressCategory::HOME, $address->category);
     $this->assertTrue($address->isPrimary);
 });
 
@@ -89,7 +89,7 @@ test('toArray includes only non-null values', function () {
         streetLine1: 'Jalan Test No. 1',
         streetLine2: 'RT/RW 001/002',
         postalCode: '12345',
-        category: AddressCategory::HOME->value,
+        category: AddressCategory::HOME,
         isPrimary: true
     );
 
@@ -102,7 +102,7 @@ test('toArray includes only non-null values', function () {
         'street_line1' => 'Jalan Test No. 1',
         'street_line2' => 'RT/RW 001/002',
         'postal_code' => '12345',
-        'category' => AddressCategory::HOME->value,
+        'category' => 'HOME',
         'is_primary' => true,
     ], $array);
 });
@@ -159,8 +159,14 @@ test('setCategory sets category and returns self', function () {
     $address = new AddressData('ID');
     $result = $address->setCategory(AddressCategory::HOME->value);
 
+    // Test with string value
     $this->assertInstanceOf(AddressData::class, $result);
     $this->assertEquals(AddressCategory::HOME->value, $address->category);
+
+    // Test with enum value
+    $result = $address->setCategory(AddressCategory::WORK);
+    $this->assertEquals(AddressCategory::WORK, $address->category);
+    $this->assertEquals('WORK', $address->toArray()['category']);
 });
 
 test('setIsPrimary sets is primary and returns self', function () {
@@ -226,9 +232,13 @@ test('validates category values', function () {
     $address = new AddressData('ID');
 
     // Valid categories
+    // Test with string values
     expect(fn () => $address->setCategory(AddressCategory::HOME->value))->not->toThrow(ValidationException::class);
     expect(fn () => $address->setCategory(AddressCategory::WORK->value))->not->toThrow(ValidationException::class);
     expect(fn () => $address->setCategory(AddressCategory::PROVINCIAL->value))->not->toThrow(ValidationException::class);
+    // Test with enum values
+    expect(fn () => $address->setCategory(AddressCategory::HOME))->not->toThrow(ValidationException::class);
+    expect(fn () => $address->setCategory(AddressCategory::WORK))->not->toThrow(ValidationException::class);
     expect(fn () => $address->setCategory(null))->not->toThrow(ValidationException::class);
 
     // Invalid categories
@@ -263,7 +273,7 @@ test('method chaining works with multiple setters', function () {
         ->setStreetLine1('Jalan Test No. 1')
         ->setStreetLine2('RT/RW 001/002')
         ->setPostalCode('12345')
-        ->setCategory(AddressCategory::HOME->value)
+        ->setCategory(AddressCategory::HOME)
         ->setIsPrimary(true);
 
     $this->assertInstanceOf(AddressData::class, $result);
@@ -272,6 +282,6 @@ test('method chaining works with multiple setters', function () {
     $this->assertEquals('Jalan Test No. 1', $address->streetLine1);
     $this->assertEquals('RT/RW 001/002', $address->streetLine2);
     $this->assertEquals('12345', $address->postalCode);
-    $this->assertEquals(AddressCategory::HOME->value, $address->category);
+    $this->assertEquals(AddressCategory::HOME, $address->category);
     $this->assertTrue($address->isPrimary);
 });

@@ -2,6 +2,7 @@
 
 namespace Mrfansi\LaravelXendit\Data\Customer;
 
+use Mrfansi\LaravelXendit\Enums\AddressCategory;
 use Mrfansi\LaravelXendit\Exceptions\ValidationException;
 use Mrfansi\LaravelXendit\Traits\AddressValidationRules;
 
@@ -19,7 +20,7 @@ class AddressData
         public ?string $streetLine1 = null,
         public ?string $streetLine2 = null,
         public ?string $postalCode = null,
-        public ?string $category = null,
+        public AddressCategory|string|null $category = null,
         public ?bool $isPrimary = false,
     ) {
         $this->validateCountry($country);
@@ -130,14 +131,14 @@ class AddressData
     /**
      * Sets the category for this address.
      *
-     * @param  string|null  $category  Must be one of: HOME, WORK, PROVINCIAL
+     * @param  AddressCategory|string|null  $category  Must be one of: HOME, WORK, PROVINCIAL
      * @return $this
      *
      * @throws ValidationException
      */
-    public function setCategory(?string $category): self
+    public function setCategory(AddressCategory|string|null $category): self
     {
-        $this->validateCategory($category);
+        $this->validateCategory($category?->value ?? $category);
         $this->category = $category;
 
         return $this;
@@ -186,7 +187,7 @@ class AddressData
         }
 
         if ($this->category !== null) {
-            $array['category'] = $this->category;
+            $array['category'] = $this->category instanceof AddressCategory ? $this->category->value : $this->category;
         }
 
         if ($this->isPrimary) {
