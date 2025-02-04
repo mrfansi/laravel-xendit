@@ -7,12 +7,10 @@ use Mrfansi\LaravelXendit\Exceptions\ValidationException;
 
 trait AddressValidationRules
 {
-
     /**
      * Maximum length for address fields.
      */
     private const MAX_LENGTH = 255;
-
 
     /**
      * Validates if a string is alphanumeric (including spaces).
@@ -139,5 +137,4 @@ trait AddressValidationRules
             }
         }
     }
-
 }
