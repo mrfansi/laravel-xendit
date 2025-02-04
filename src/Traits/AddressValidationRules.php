@@ -127,11 +127,14 @@ trait AddressValidationRules
      *
      * @throws ValidationException
      */
-    private function validateCategory(?string $value): void
+    private function validateCategory(AddressCategory|string|null $value): void
     {
         if ($value !== null) {
             try {
-                AddressCategory::from($value);
+                if ($value instanceof AddressCategory) {
+                    return;
+                }
+                AddressCategory::from((string) $value);
             } catch (\ValueError $e) {
                 throw new ValidationException('Category must be one of: HOME, WORK, PROVINCIAL');
             }
