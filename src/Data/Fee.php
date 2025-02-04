@@ -1,9 +1,9 @@
 <?php
 
-namespace Mrfansi\Xendit\Data;
+namespace Mrfansi\LaravelXendit\Data;
 
 use InvalidArgumentException;
-use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
+use Mrfansi\LaravelXendit\Data\Abstracts\AbstractDataTransferObject;
 
 /**
  * Class Fee

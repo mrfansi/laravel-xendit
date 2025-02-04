@@ -1,6 +1,6 @@
 <?php
 
-use Mrfansi\Xendit\Data\Address;
+use Mrfansi\LaravelXendit\Data\Address;
 
 /**
  * Test cases for Address Data Transfer Object

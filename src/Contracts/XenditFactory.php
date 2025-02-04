@@ -1,8 +1,8 @@
 <?php
 
-namespace Mrfansi\Xendit\Contracts;
+namespace Mrfansi\LaravelXendit\Contracts;
 
-use Mrfansi\Xendit\Xendit\Invoice;
+use Mrfansi\LaravelXendit\Xendit\Invoice;
 use RuntimeException;
 
 interface XenditFactory

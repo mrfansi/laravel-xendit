@@ -1,9 +1,9 @@
 <?php
 
-namespace Mrfansi\Xendit\Data;
+namespace Mrfansi\LaravelXendit\Data;
 
-use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
-use Mrfansi\Xendit\Enums\InvoiceStatus;
+use Mrfansi\LaravelXendit\Data\Abstracts\AbstractDataTransferObject;
+use Mrfansi\LaravelXendit\Enums\InvoiceStatus;
 use ReflectionClass;
 
 /**

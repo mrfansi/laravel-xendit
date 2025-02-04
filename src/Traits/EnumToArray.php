@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\Xendit\Traits;
+namespace Mrfansi\LaravelXendit\Traits;
 
 trait EnumToArray
 {

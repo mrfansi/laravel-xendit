@@ -1,9 +1,9 @@
 <?php
 
-namespace Mrfansi\Xendit\Data;
+namespace Mrfansi\LaravelXendit\Data;
 
 use DateTimeInterface;
-use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
+use Mrfansi\LaravelXendit\Data\Abstracts\AbstractDataTransferObject;
 
 /**
  * Class InvoiceData

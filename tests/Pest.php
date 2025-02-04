@@ -1,5 +1,5 @@
 <?php
 
-use Mrfansi\Xendit\Tests\TestCase;
+use Mrfansi\LaravelXendit\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

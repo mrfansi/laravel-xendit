@@ -1,9 +1,10 @@
 <?php
 
-namespace Mrfansi\Xendit\Data\Abstracts;
+namespace Mrfansi\LaravelXendit\Data\Abstracts;
 
-use Mrfansi\Xendit\Data\Contracts\DataTransferObject;
+use Mrfansi\LaravelXendit\Data\Contracts\DataTransferObject;
 use ReflectionClass;
+use ReflectionException;
 use ReflectionNamedType;
 use ReflectionProperty;
 
@@ -51,11 +52,12 @@ abstract class AbstractDataTransferObject implements DataTransferObject
     /**
      * Create DTO from array
      *
-     * @param  array<string, mixed>  $data
+     * @param array<string, mixed> $data
+     * @throws ReflectionException
      */
     public static function fromArray(array $data): static
     {
-        /** @var static */
+        /** @var static $instance */
         $instance = (new ReflectionClass(static::class))->newInstance();
         $reflection = new ReflectionClass($instance);
         $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);

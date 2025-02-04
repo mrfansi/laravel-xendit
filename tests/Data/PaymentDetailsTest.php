@@ -1,7 +1,7 @@
 <?php
 
-use Mrfansi\Xendit\Data\PaymentDetails;
-use Mrfansi\Xendit\Enums\QrisSource;
+use Mrfansi\LaravelXendit\Data\PaymentDetails;
+use Mrfansi\LaravelXendit\Enums\QrisSource;
 
 test('payment details can be created with values', function () {
     $details = new PaymentDetails(

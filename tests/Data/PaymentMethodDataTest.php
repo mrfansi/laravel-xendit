@@ -1,7 +1,7 @@
 <?php
 
-use Mrfansi\Xendit\Data\PaymentMethodData;
-use Mrfansi\Xendit\Enums\PaymentMethod;
+use Mrfansi\LaravelXendit\Data\PaymentMethodData;
+use Mrfansi\LaravelXendit\Enums\PaymentMethod;
 
 test('payment method data can be created with values', function () {
     $data = new PaymentMethodData(

@@ -1,8 +1,8 @@
 <?php
 
-namespace Mrfansi\Xendit\Data\CardChannel;
+namespace Mrfansi\LaravelXendit\Data\CardChannel;
 
-use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
+use Mrfansi\LaravelXendit\Data\Abstracts\AbstractDataTransferObject;
 
 /**
  * Class AllowedTerm

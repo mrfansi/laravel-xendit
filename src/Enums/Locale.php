@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\Xendit\Enums;
+namespace Mrfansi\LaravelXendit\Enums;
 
 enum Locale: string
 {

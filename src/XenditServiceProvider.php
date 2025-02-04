@@ -1,8 +1,8 @@
 <?php
 
-namespace Mrfansi\Xendit;
+namespace Mrfansi\LaravelXendit;
 
-use Mrfansi\Xendit\Commands\XenditCommand;
+use Mrfansi\LaravelXendit\Commands\XenditCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

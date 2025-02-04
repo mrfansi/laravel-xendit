@@ -1,15 +1,15 @@
 <?php
 
-namespace Mrfansi\Xendit\Xendit;
+namespace Mrfansi\LaravelXendit\Xendit;
 
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use InvalidArgumentException;
-use Mrfansi\Xendit\Data\InvoiceData;
-use Mrfansi\Xendit\Data\InvoiceParams;
-use Mrfansi\Xendit\Data\InvoiceResponse;
+use Mrfansi\LaravelXendit\Data\InvoiceData;
+use Mrfansi\LaravelXendit\Data\InvoiceParams;
+use Mrfansi\LaravelXendit\Data\InvoiceResponse;
 use RuntimeException;
 use Throwable;
 

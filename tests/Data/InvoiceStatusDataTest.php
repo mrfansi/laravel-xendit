@@ -1,7 +1,7 @@
 <?php
 
-use Mrfansi\Xendit\Data\InvoiceStatusData;
-use Mrfansi\Xendit\Enums\InvoiceStatus;
+use Mrfansi\LaravelXendit\Data\InvoiceStatusData;
+use Mrfansi\LaravelXendit\Enums\InvoiceStatus;
 
 test('invoice status data can be created with values', function () {
     $data = new InvoiceStatusData(

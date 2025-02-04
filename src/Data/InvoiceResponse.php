@@ -1,14 +1,14 @@
 <?php
 
-namespace Mrfansi\Xendit\Data;
+namespace Mrfansi\LaravelXendit\Data;
 
 use Carbon\Carbon;
 use DateTimeInterface;
-use Mrfansi\Xendit\Data\Abstracts\AbstractDataTransferObject;
-use Mrfansi\Xendit\Data\CardChannel\CardChannelProperties;
-use Mrfansi\Xendit\Enums\Currency;
-use Mrfansi\Xendit\Enums\InvoiceStatus;
-use Mrfansi\Xendit\Traits\EnumToArray;
+use Mrfansi\LaravelXendit\Data\Abstracts\AbstractDataTransferObject;
+use Mrfansi\LaravelXendit\Data\CardChannel\CardChannelProperties;
+use Mrfansi\LaravelXendit\Enums\Currency;
+use Mrfansi\LaravelXendit\Enums\InvoiceStatus;
+use Mrfansi\LaravelXendit\Traits\EnumToArray;
 use ReflectionClass;
 
 class InvoiceResponse extends AbstractDataTransferObject

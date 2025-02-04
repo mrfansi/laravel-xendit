@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\Xendit\Commands;
+namespace Mrfansi\LaravelXendit\Commands;
 
 use Illuminate\Console\Command;
 

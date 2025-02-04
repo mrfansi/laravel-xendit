@@ -1,9 +1,9 @@
 <?php
 
-namespace Mrfansi\Xendit\Tests;
+namespace Mrfansi\LaravelXendit\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Mrfansi\Xendit\XenditServiceProvider;
+use Mrfansi\LaravelXendit\XenditServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra

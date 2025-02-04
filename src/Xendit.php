@@ -5,8 +5,8 @@ namespace Mrfansi\Xendit;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
-use Mrfansi\Xendit\Contracts\XenditFactory;
-use Mrfansi\Xendit\Xendit\Invoice;
+use Mrfansi\LaravelXendit\Contracts\XenditFactory;
+use Mrfansi\LaravelXendit\Xendit\Invoice;
 use RuntimeException;
 
 class Xendit implements XenditFactory

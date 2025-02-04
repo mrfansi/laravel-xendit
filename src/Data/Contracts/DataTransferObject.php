@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\Xendit\Data\Contracts;
+namespace Mrfansi\LaravelXendit\Data\Contracts;
 
 interface DataTransferObject
 {

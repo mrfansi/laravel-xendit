@@ -1,7 +1,7 @@
 <?php
 
-use Mrfansi\Xendit\Data\Address;
-use Mrfansi\Xendit\Data\Customer;
+use Mrfansi\LaravelXendit\Data\Address;
+use Mrfansi\LaravelXendit\Data\Customer;
 
 /**
  * Test cases for Customer Data Transfer Object
