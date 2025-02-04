@@ -45,7 +45,7 @@ class Invoice
     public function all(InvoiceParams $params): Collection
     {
         try {
-            $response = $this->client->get('/v2/invoices', $params->all());
+            $response = $this->client->get('/v2/invoices', $params->toArray());
 
             return collect($response->json())
                 ->map(function (array $invoice) {

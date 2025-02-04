@@ -2,7 +2,9 @@
 
 namespace Mrfansi\LaravelXendit\Data;
 
-class InvoiceBody
+class InvoiceRequest
 {
+
+
 
 }
