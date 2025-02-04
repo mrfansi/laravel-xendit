@@ -18,13 +18,12 @@ class Item extends AbstractDataTransferObject
     /**
      * Create a new Item instance
      *
-     * @param  string  $name  Name of the item
-     * @param  int  $quantity  Quantity of the item
-     * @param  float  $price  Price of the item
-     * @param  string|null  $category  Category of the item
-     * @param  string|null  $url  URL of the item
+     * @param string|null $name Name of the item
+     * @param int|null $quantity Quantity of the item
+     * @param float|null $price Price of the item
+     * @param string|null $category Category of the item
+     * @param string|null $url URL of the item
      *
-     * @throws InvalidArgumentException
      */
     public function __construct(
         public ?string $name,
