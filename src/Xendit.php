@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrfansi\Xendit;
+namespace Mrfansi\LaravelXendit;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
