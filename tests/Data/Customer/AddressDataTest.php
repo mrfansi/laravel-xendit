@@ -39,6 +39,72 @@ test('it can be instantiated with all parameters', function () {
     $this->assertTrue($address->isPrimary);
 });
 
+test('toArray excludes specific null values while keeping non-null values', function () {
+    $address = new AddressData('ID');
+    $address->setProvinceState('DKI Jakarta')
+        ->setCity(null)
+        ->setStreetLine1('Jl. Test')
+        ->setStreetLine2(null)
+        ->setPostalCode('12345')
+        ->setCategory(null)
+        ->setIsPrimary(true);
+
+    $array = $address->toArray();
+
+    $this->assertEquals([
+        'country' => 'ID',
+        'province_state' => 'DKI Jakarta',
+        'street_line1' => 'Jl. Test',
+        'postal_code' => '12345',
+        'is_primary' => true,
+    ], $array);
+
+    $this->assertArrayNotHasKey('city', $array);
+    $this->assertArrayNotHasKey('street_line2', $array);
+    $this->assertArrayNotHasKey('category', $array);
+});
+
+test('toArray returns only country when other fields are null', function () {
+    $address = new AddressData('ID');
+
+    $array = $address->toArray();
+
+    $this->assertEquals(['country' => 'ID'], $array);
+    $this->assertArrayNotHasKey('province_state', $array);
+    $this->assertArrayNotHasKey('city', $array);
+    $this->assertArrayNotHasKey('street_line1', $array);
+    $this->assertArrayNotHasKey('street_line2', $array);
+    $this->assertArrayNotHasKey('postal_code', $array);
+    $this->assertArrayNotHasKey('category', $array);
+    $this->assertArrayNotHasKey('is_primary', $array);
+});
+
+test('toArray includes only non-null values', function () {
+    $address = new AddressData(
+        country: 'ID',
+        provinceState: 'DKI Jakarta',
+        city: 'Jakarta Selatan',
+        streetLine1: 'Jl. Test',
+        streetLine2: 'No. 123',
+        postalCode: '12345',
+        category: 'home',
+        isPrimary: true
+    );
+
+    $array = $address->toArray();
+
+    $this->assertEquals([
+        'country' => 'ID',
+        'province_state' => 'DKI Jakarta',
+        'city' => 'Jakarta Selatan',
+        'street_line1' => 'Jl. Test',
+        'street_line2' => 'No. 123',
+        'postal_code' => '12345',
+        'category' => 'home',
+        'is_primary' => true,
+    ], $array);
+});
+
 test('setCountry sets country and returns self', function () {
     $address = new AddressData('ID');
     $result = $address->setCountry('US');
