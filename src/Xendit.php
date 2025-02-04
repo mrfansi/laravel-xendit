@@ -5,11 +5,12 @@ namespace Mrfansi\LaravelXendit;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
+use Mrfansi\LaravelXendit\Contracts\HttpClientFactory;
 use Mrfansi\LaravelXendit\Contracts\XenditFactory;
 use Mrfansi\LaravelXendit\Xendit\Invoice;
 use RuntimeException;
 
-class Xendit implements XenditFactory
+class Xendit implements XenditFactory, HttpClientFactory
 {
     /**
      * HTTP client instance for making API requests

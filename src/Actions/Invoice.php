@@ -33,16 +33,13 @@ class Invoice
     /**
      * Retrieve a list of invoices from Xendit API
      *
-     * @param  InvoiceParams  $params  Filtering and pagination parameters
+     * @param InvoiceParams|null $params Filtering and pagination parameters
      * @return Collection<InvoiceResponse> Collection of invoice objects
      *
-     * @throws InvalidArgumentException When input parameters are invalid
-     * @throws ConnectionException When API connection fails
-     * @throws RuntimeException|Throwable When API response is not successful
-     *
+     * @throws Throwable When API response is not successful
      * @see https://developers.xendit.co/api-reference/#list-all-invoices
      */
-    public function all(InvoiceParams $params): Collection
+    public function all(?InvoiceParams $params): Collection
     {
         try {
             $response = $this->client->get('/v2/invoices', $params->toArray());
