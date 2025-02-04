@@ -2,4 +2,6 @@
 
 namespace Mrfansi\LaravelXendit\Exceptions;
 
-class ValidationException extends \InvalidArgumentException {}
+use InvalidArgumentException;
+
+class ValidationException extends InvalidArgumentException {}
