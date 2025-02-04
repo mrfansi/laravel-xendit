@@ -7,9 +7,9 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use InvalidArgumentException;
-use Mrfansi\LaravelXendit\Data\InvoiceData;
-use Mrfansi\LaravelXendit\Data\InvoiceParams;
-use Mrfansi\LaravelXendit\Data\InvoiceResponse;
+use Mrfansi\LaravelXendit\Data\Invoice\InvoiceData;
+use Mrfansi\LaravelXendit\Data\Invoice\InvoiceParams;
+use Mrfansi\LaravelXendit\Data\Invoice\InvoiceResponse;
 use RuntimeException;
 use Throwable;
 

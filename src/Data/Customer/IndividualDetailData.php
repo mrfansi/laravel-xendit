@@ -197,4 +197,16 @@ class IndividualDetailData
             throw new ValidationException('Gender must be one of: MALE, FEMALE, OTHER');
         }
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            givenNames: $data['given_names'],
+            surname: $data['surname'] ?? null,
+            nationality: $data['nationality'] ?? null,
+            placeOfBirth: $data['place_of_birth'] ?? null,
+            dateOfBirth: $data['date_of_birth'] ?? null,
+            gender: $data['gender'] ?? null,
+        );
+    }
 }

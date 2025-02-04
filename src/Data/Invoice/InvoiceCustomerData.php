@@ -72,4 +72,19 @@ class InvoiceCustomerData extends IndividualDetailData
 
         return $array;
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            givenNames: $data['given_names'],
+            surname: $data['surname'] ?? null,
+            email: $data['email'] ?? null,
+            mobileNumber: $data['mobile_number'] ?? null,
+            nationality: $data['nationality'] ?? null,
+            placeOfBirth: $data['place_of_birth'] ?? null,
+            dateOfBirth: $data['date_of_birth'] ?? null,
+            gender: $data['gender'] ?? null,
+            addresses: isset($data['addresses']) ? array_map(fn ($address) => AddressData::fromArray($address), $data['addresses']) : null,
+        );
+    }
 }

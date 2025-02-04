@@ -196,4 +196,18 @@ class AddressData
 
         return $array;
     }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            country: $data['country'],
+            provinceState: $data['province_state'] ?? null,
+            city: $data['city'] ?? null,
+            streetLine1: $data['street_line1'] ?? null,
+            streetLine2: $data['street_line2'] ?? null,
+            postalCode: $data['postal_code'] ?? null,
+            category: isset($data['category']) ? AddressCategory::from($data['category']) : null,
+            isPrimary: $data['is_primary'] ?? false,
+        );
+    }
 }

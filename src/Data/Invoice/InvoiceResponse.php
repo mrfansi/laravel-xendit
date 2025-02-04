@@ -1,5 +1,5 @@
 <?php
 
-namespace Mrfansi\LaravelXendit\Data;
+namespace Mrfansi\LaravelXendit\Data\Invoice;
 
 class InvoiceResponse extends InvoiceData {}
