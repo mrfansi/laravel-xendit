@@ -2,6 +2,7 @@
 
 namespace Mrfansi\LaravelXendit\Data\Customer;
 
+use Mrfansi\LaravelXendit\Enums\BusinessType;
 use Mrfansi\LaravelXendit\Exceptions\ValidationException;
 use Mrfansi\LaravelXendit\Traits\BusinessDetailValidationRules;
 
@@ -14,7 +15,7 @@ class BusinessDetailData
 
     public function __construct(
         public string $businessName,
-        public string $businessType,
+        public BusinessType|string $businessType,
         public ?string $tradingName = null,
         public ?string $natureOfBusiness = null,
         public ?string $businessDomicile = null,
@@ -46,11 +47,11 @@ class BusinessDetailData
     /**
      * Sets the business type of the customer.
      *
-     * @param  string  $businessType  Maximum 255 characters, alphanumeric only
+     * @param  BusinessType|string  $businessType  Must be a valid BusinessType enum or its string value
      *
      * @throws ValidationException
      */
-    public function setBusinessType(string $businessType): self
+    public function setBusinessType(BusinessType|string $businessType): self
     {
         $this->validateBusinessType($businessType);
         $this->businessType = $businessType;
@@ -127,7 +128,7 @@ class BusinessDetailData
     {
         $array = [
             'business_name' => $this->businessName,
-            'business_type' => $this->businessType,
+            'business_type' => $this->businessType instanceof BusinessType ? $this->businessType->value : $this->businessType,
         ];
 
         if ($this->tradingName !== null) {

@@ -48,14 +48,15 @@ trait BusinessDetailValidationRules
      *
      * @throws ValidationException
      */
-    private function validateBusinessType(string $value): void
+    private function validateBusinessType(BusinessType|string $value): void
     {
-        try {
-            if (! in_array($value, array_column(BusinessType::cases(), 'value'))) {
-                throw new ValidationException('Business type must be one of: '.implode(', ', array_column(BusinessType::cases(), 'value')));
-            }
-        } catch (\ValueError $e) {
-            throw new ValidationException('Business type must be one of: '.implode(', ', array_column(BusinessType::cases(), 'value')));
+        if ($value instanceof BusinessType) {
+            return;
+        }
+
+        $validValues = array_column(BusinessType::cases(), 'value');
+        if (! in_array($value, $validValues)) {
+            throw new ValidationException('Business type must be one of: '.implode(', ', $validValues));
         }
     }
 
