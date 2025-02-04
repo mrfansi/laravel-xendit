@@ -82,7 +82,7 @@ class Invoice
                 );
             }
 
-            return InvoiceResponse::from($response);
+            return InvoiceResponse::fromArray($response);
         } catch (Throwable $e) {
             Log::error('Failed to create invoice', [
                 'error' => $e->getMessage(),
@@ -115,7 +115,7 @@ class Invoice
                 );
             }
 
-            return InvoiceResponse::from($response);
+            return InvoiceResponse::fromArray($response);
         } catch (Throwable $e) {
             Log::error('Failed to retrieve invoice', [
                 'error' => $e->getMessage(),
@@ -148,7 +148,7 @@ class Invoice
                 );
             }
 
-            return InvoiceResponse::from($response);
+            return InvoiceResponse::fromArray($response);
         } catch (Throwable $e) {
             Log::error('Failed to expire invoice', [
                 'error' => $e->getMessage(),
