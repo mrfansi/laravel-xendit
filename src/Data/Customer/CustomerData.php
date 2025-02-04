@@ -2,7 +2,6 @@
 
 namespace Mrfansi\LaravelXendit\Data\Customer;
 
-use Illuminate\Support\Collection;
 use Mrfansi\LaravelXendit\Exceptions\ValidationException;
 use Mrfansi\LaravelXendit\Traits\CustomerValidationRules;
 
@@ -19,11 +18,11 @@ class CustomerData
         public ?string $phoneNumber = null,
         public ?string $hashedPhoneNumber = null,
         public ?string $email = null,
-        /** @var Collection<AddressData> */
+        /** @var AddressData[] */
         public ?array $addresses = null,
-        /** @var Collection<IdentityAccountData> */
+        /** @var IdentityAccountData[] */
         public ?array $identityAccounts = null,
-        /** @var Collection<KycDocumentData> */
+        /** @var KycDocumentData[] */
         public ?array $kycDocuments = null,
         public ?string $description = null,
         public ?string $dateOfRegistration = null,
