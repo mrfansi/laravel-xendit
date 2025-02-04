@@ -13,16 +13,15 @@ class AddressData
     use AddressValidationRules;
 
     public function __construct(
-        public string  $country,
+        public string $country,
         public ?string $provinceState = null,
         public ?string $city = null,
         public ?string $streetLine1 = null,
         public ?string $streetLine2 = null,
         public ?string $postalCode = null,
         public ?string $category = null,
-        public ?bool   $isPrimary = false,
-    )
-    {
+        public ?bool $isPrimary = false,
+    ) {
         $this->validateCountry($country);
         $this->validateProvinceState($provinceState);
         $this->validateCity($city);
@@ -35,7 +34,7 @@ class AddressData
     /**
      * Sets the country for this address.
      *
-     * @param string $country ISO 3166-2 country code (2 letters)
+     * @param  string  $country  ISO 3166-2 country code (2 letters)
      * @return $this
      *
      * @throws ValidationException
@@ -51,7 +50,7 @@ class AddressData
     /**
      * Sets the province or state for this address.
      *
-     * @param string|null $provinceState Maximum 255 characters, alphanumeric only
+     * @param  string|null  $provinceState  Maximum 255 characters, alphanumeric only
      * @return $this
      *
      * @throws ValidationException
@@ -67,7 +66,7 @@ class AddressData
     /**
      * Sets the city for this address.
      *
-     * @param string|null $city Maximum 255 characters, alphanumeric only
+     * @param  string|null  $city  Maximum 255 characters, alphanumeric only
      * @return $this
      *
      * @throws ValidationException
@@ -83,7 +82,7 @@ class AddressData
     /**
      * Sets the first line of the street address.
      *
-     * @param string|null $streetLine1 Maximum 255 characters, alphanumeric only
+     * @param  string|null  $streetLine1  Maximum 255 characters, alphanumeric only
      * @return $this
      *
      * @throws ValidationException
@@ -99,7 +98,7 @@ class AddressData
     /**
      * Sets the second line of the street address.
      *
-     * @param string|null $streetLine2 Maximum 255 characters, alphanumeric only
+     * @param  string|null  $streetLine2  Maximum 255 characters, alphanumeric only
      * @return $this
      *
      * @throws ValidationException
@@ -115,7 +114,7 @@ class AddressData
     /**
      * Sets the postal code for this address.
      *
-     * @param string|null $postalCode Maximum 255 characters, alphanumeric only
+     * @param  string|null  $postalCode  Maximum 255 characters, alphanumeric only
      * @return $this
      *
      * @throws ValidationException
@@ -131,7 +130,7 @@ class AddressData
     /**
      * Sets the category for this address.
      *
-     * @param string|null $category Must be one of: HOME, WORK, PROVINCIAL
+     * @param  string|null  $category  Must be one of: HOME, WORK, PROVINCIAL
      * @return $this
      *
      * @throws ValidationException
@@ -147,7 +146,7 @@ class AddressData
     /**
      * Sets whether this address is the primary address for the customer.
      *
-     * @param bool|null $isPrimary Defaults to false
+     * @param  bool|null  $isPrimary  Defaults to false
      * @return $this
      */
     public function setIsPrimary(?bool $isPrimary): self
