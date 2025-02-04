@@ -2,7 +2,74 @@
 
 namespace Mrfansi\LaravelXendit\Data\Invoice;
 
-class InvoiceCustomerData
-{
+use Mrfansi\LaravelXendit\Data\Customer\AddressData;
+use Mrfansi\LaravelXendit\Data\Customer\IndividualDetailData;
+use Mrfansi\LaravelXendit\Exceptions\ValidationException;
 
+class InvoiceCustomerData extends IndividualDetailData
+{
+    public function __construct(
+        public string $givenNames,
+        public ?string $surname = null,
+        public ?string $email = null,
+        public ?string $mobileNumber = null,
+        public ?string $nationality = null,
+        public ?string $placeOfBirth = null,
+        public ?string $dateOfBirth = null,
+        public ?string $gender = null,
+        /** @var AddressData[] */
+        public ?array $addresses = null,
+    ) {
+        parent::__construct($givenNames, $surname, $nationality, $placeOfBirth, $dateOfBirth, $gender);
+        $this->validateEmail($email);
+        $this->validateMobileNumber($mobileNumber);
+        $this->validateAddresses($addresses);
+    }
+
+    private function validateEmail(?string $email): void
+    {
+        if ($email !== null && ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new ValidationException('Invalid email format');
+        }
+    }
+
+    private function validateMobileNumber(?string $mobileNumber): void
+    {
+        if ($mobileNumber !== null && ! preg_match('/^\+[1-9]\d{1,14}$/', $mobileNumber)) {
+            throw new ValidationException('Mobile number must be in E164 format (e.g., +6281234567890)');
+        }
+    }
+
+    private function validateAddresses(?array $addresses): void
+    {
+        if ($addresses !== null) {
+            foreach ($addresses as $address) {
+                if (! ($address instanceof AddressData)) {
+                    throw new ValidationException('Each address must be an instance of AddressData');
+                }
+            }
+        }
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
+    {
+        $array = parent::toArray();
+
+        if ($this->email !== null) {
+            $array['email'] = $this->email;
+        }
+
+        if ($this->mobileNumber !== null) {
+            $array['mobile_number'] = $this->mobileNumber;
+        }
+
+        if ($this->addresses !== null) {
+            $array['addresses'] = array_map(fn (AddressData $address) => $address->toArray(), $this->addresses);
+        }
+
+        return $array;
+    }
 }
