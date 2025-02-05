@@ -32,8 +32,10 @@ trait AddressValidationRules
      */
     private function validateCountry(string $country): void
     {
-        if (strlen($country) !== 2 || ! ctype_alpha($country)) {
-            throw new ValidationException('Country must be a valid ISO 3166-2 code (2 letters)');
+        if ($country != null) {
+            if (strlen($country) !== 2 || ! ctype_alpha($country)) {
+                throw new ValidationException('Country must be a valid ISO 3166-2 code (2 letters)');
+            }
         }
     }
 
