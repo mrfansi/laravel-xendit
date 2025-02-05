@@ -4,7 +4,6 @@ return [
     'endpoint' => env('XENDIT_ENDPOINT', 'https://api.xendit.co'),
     'secret_key' => env('XENDIT_SECRET_KEY', ''),
 
-
     'countries' => [
         'AF' => 'Afghanistan',
         'AX' => 'Aland Islands',
@@ -251,6 +250,6 @@ return [
         'EH' => 'Western Sahara',
         'YE' => 'Yemen',
         'ZM' => 'Zambia',
-        'ZW' => 'Zimbabwe'
-    ]
+        'ZW' => 'Zimbabwe',
+    ],
 ];
