@@ -31,7 +31,7 @@ trait KycDocumentValidationRules
     private function validateCountry(string $value): void
     {
         if ($value != null) {
-            if (strlen($value) !== 2 || !ctype_alpha($value)) {
+            if (strlen($value) !== 2 || ! ctype_alpha($value)) {
                 throw new ValidationException('Country must be a valid ISO 3166-2 code (2 letters)');
             }
         }
@@ -55,8 +55,8 @@ trait KycDocumentValidationRules
             'BUSINESS_LICENSE',
         ];
 
-        if (!in_array($value, $validTypes)) {
-            throw new ValidationException('Type must be one of: ' . implode(', ', $validTypes));
+        if (! in_array($value, $validTypes)) {
+            throw new ValidationException('Type must be one of: '.implode(', ', $validTypes));
         }
     }
 
@@ -80,8 +80,8 @@ trait KycDocumentValidationRules
                 'MEDICAL_ID',
             ];
 
-            if (!in_array($value, $validSubTypes)) {
-                throw new ValidationException('Sub type must be one of: ' . implode(', ', $validSubTypes));
+            if (! in_array($value, $validSubTypes)) {
+                throw new ValidationException('Sub type must be one of: '.implode(', ', $validSubTypes));
             }
         }
     }
@@ -97,7 +97,7 @@ trait KycDocumentValidationRules
             if (strlen($value) > self::MAX_LENGTH) {
                 throw new ValidationException('Document name must not exceed 255 characters');
             }
-            if (!$this->isAlphanumeric($value)) {
+            if (! $this->isAlphanumeric($value)) {
                 throw new ValidationException('Document name must be alphanumeric');
             }
         }
@@ -125,7 +125,7 @@ trait KycDocumentValidationRules
     private function validateExpiresAt(?string $value): void
     {
         if ($value !== null) {
-            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+            if (! preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
                 throw new ValidationException('Expiry date must be in YYYY-MM-DD format');
             }
         }
@@ -142,7 +142,7 @@ trait KycDocumentValidationRules
             if (strlen($value) > self::MAX_LENGTH) {
                 throw new ValidationException('Holder name must not exceed 255 characters');
             }
-            if (!$this->isAlphanumeric($value)) {
+            if (! $this->isAlphanumeric($value)) {
                 throw new ValidationException('Holder name must be alphanumeric');
             }
         }
@@ -157,7 +157,7 @@ trait KycDocumentValidationRules
     {
         if ($value !== null) {
             foreach ($value as $image) {
-                if (!is_string($image)) {
+                if (! is_string($image)) {
                     throw new ValidationException('Document images must be an array of strings');
                 }
             }
