@@ -45,8 +45,6 @@ class Invoice
         try {
             $response = $this->client->get('/v2/invoices', $params?->toArray());
 
-//            dd($response->json());
-
             return collect($response->json())
                 ->map(function (array $invoice) {
                     return InvoiceResponse::fromArray($invoice);

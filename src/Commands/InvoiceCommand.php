@@ -61,5 +61,7 @@ class InvoiceCommand extends Command
                 ->all(),
             'Fetching invoices...'
         );
+
+        dd($invoices);
     }
 }
