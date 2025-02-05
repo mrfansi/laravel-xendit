@@ -2,6 +2,7 @@
 
 namespace Mrfansi\LaravelXendit\Data\Invoice;
 
+use Illuminate\Support\Str;
 use Mrfansi\LaravelXendit\Enums\Currency;
 use Mrfansi\LaravelXendit\Enums\InvoiceStatus;
 use Mrfansi\LaravelXendit\Enums\Locale;
@@ -202,5 +203,17 @@ class InvoiceResponse extends InvoiceData
         }
 
         return $data;
+    }
+
+    public function toTable(): array
+    {
+        $rows = collect($this->toArray());
+        return $rows->mapWithKeys(function ($value, $key) {
+            if ($key == "id") {
+                return [Str::upper($key) => $value];
+            }
+
+            return [Str::headline($key) => $value];
+        })->all();
     }
 }

@@ -7,6 +7,7 @@ enum PaymentMethod: string
     // Universal Payment Method
     case CREDIT_CARD = 'CREDIT_CARD';
     case BANK_TRANSFER = 'BANK_TRANSFER';
+    case EWALLET = 'EWALLET';
 
     // Indonesia Payment Methods
     case BCA = 'BCA';
