@@ -35,17 +35,6 @@ class Xendit implements HttpClientFactory, XenditFactoryInterface
     private ?string $idempotencyKey = null;
 
     /**
-     * Constructor for Xendit factory
-     *
-     * @throws InvalidArgumentException When required configuration is missing
-     */
-    public function __construct()
-    {
-        $this->validateConfiguration();
-        $this->initializeHttpClient();
-    }
-
-    /**
      * Sets the for-user-id header for xenPlatform sub-account transactions
      *
      * @param  string  $userId  The sub-account user ID
@@ -91,6 +80,8 @@ class Xendit implements HttpClientFactory, XenditFactoryInterface
      */
     private function initializeHttpClient(): void
     {
+        $this->validateConfiguration();
+
         $headers = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
@@ -150,6 +141,8 @@ class Xendit implements HttpClientFactory, XenditFactoryInterface
      */
     public function invoice(): Invoice
     {
+        $this->initializeHttpClient();
+
         return new Invoice($this->getClient());
     }
 }

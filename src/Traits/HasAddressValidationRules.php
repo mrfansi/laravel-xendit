@@ -5,7 +5,7 @@ namespace Mrfansi\LaravelXendit\Traits;
 use Mrfansi\LaravelXendit\Enums\AddressCategory;
 use Mrfansi\LaravelXendit\Exceptions\ValidationException;
 
-trait AddressValidationRules
+trait HasAddressValidationRules
 {
     /**
      * Maximum length for address fields.

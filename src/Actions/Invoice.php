@@ -40,10 +40,12 @@ class Invoice
      *
      * @see https://developers.xendit.co/api-reference/#list-all-invoices
      */
-    public function all(?InvoiceParams $params): Collection
+    public function all(?InvoiceParams $params = null): Collection
     {
         try {
-            $response = $this->client->get('/v2/invoices', $params->toArray());
+            $response = $this->client->get('/v2/invoices', $params?->toArray());
+
+//            dd($response->json());
 
             return collect($response->json())
                 ->map(function (array $invoice) {

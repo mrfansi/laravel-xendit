@@ -4,14 +4,16 @@ namespace Mrfansi\LaravelXendit\Data\Customer;
 
 use Mrfansi\LaravelXendit\Enums\AddressCategory;
 use Mrfansi\LaravelXendit\Exceptions\ValidationException;
-use Mrfansi\LaravelXendit\Traits\AddressValidationRules;
+use Mrfansi\LaravelXendit\Traits\HasAddressValidationRules;
+use Mrfansi\LaravelXendit\Traits\HasCountry;
 
 /**
  * Represents a customer's address information.
  */
 class AddressData
 {
-    use AddressValidationRules;
+    use HasAddressValidationRules;
+    use HasCountry;
 
     public function __construct(
         public string $country,
@@ -23,6 +25,8 @@ class AddressData
         public AddressCategory|string|null $category = null,
         public ?bool $isPrimary = false,
     ) {
+        $country = $this->getCountryCode($country);
+
         $this->validateCountry($country);
         $this->validateProvinceState($provinceState);
         $this->validateCity($city);
@@ -35,7 +39,7 @@ class AddressData
     /**
      * Sets the country for this address.
      *
-     * @param  string  $country  ISO 3166-2 country code (2 letters)
+     * @param  string  $country  ISO 3166-2 country code (two letters)
      * @return $this
      *
      * @throws ValidationException

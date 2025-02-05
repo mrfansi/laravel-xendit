@@ -53,7 +53,7 @@ class InvoiceCommand extends Command
         }
     }
 
-    public function all()
+    public function all(): void
     {
         /** @var Collection<InvoiceResponse> $invoices */
         $invoices = spin(

@@ -56,8 +56,8 @@ class InvoiceData
 
         // Validate customer notification preference if provided
         if ($this->customerNotificationPreference !== null) {
-            $validChannels = ['whatsapp', 'email', 'viber'];
-            $validTypes = ['invoice_created', 'invoice_reminder', 'invoice_paid'];
+            $validChannels = ['whatsapp', 'email', 'viber', 'sms'];
+            $validTypes = ['invoice_created', 'invoice_reminder', 'invoice_paid', 'invoice_expired'];
 
             foreach ($this->customerNotificationPreference as $type => $channels) {
                 if (! in_array($type, $validTypes)) {

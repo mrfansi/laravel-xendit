@@ -93,7 +93,7 @@ trait IdentityAccountValidationRules
     }
 
     /**
-     * Validates the properties field.
+     * Validates the property field.
      *
      * @throws ValidationException
      */
