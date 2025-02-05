@@ -2,10 +2,8 @@
 
 namespace Mrfansi\LaravelXendit\Commands;
 
-use Akaunting\Money\Money;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Mrfansi\LaravelXendit\Data\Invoice\InvoiceParams;
 use Mrfansi\LaravelXendit\Data\Invoice\InvoiceResponse;
@@ -48,11 +46,11 @@ class InvoiceCommand extends Command
             $action = $this->argument('action');
             $this->dispatchAction($action);
         } catch (InvalidArgumentException $e) {
-            $this->error('[INVALID_INPUT] ' . $e->getMessage());
+            $this->error('[INVALID_INPUT] '.$e->getMessage());
         } catch (RuntimeException $e) {
-            $this->error('[API_ERROR] ' . $e->getMessage());
+            $this->error('[API_ERROR] '.$e->getMessage());
         } catch (Throwable $e) {
-            $this->error('[UNEXPECTED_ERROR] ' . $e->getMessage());
+            $this->error('[UNEXPECTED_ERROR] '.$e->getMessage());
             if (app()->environment('local')) {
                 $this->error($e->getTraceAsString());
             }
@@ -62,17 +60,14 @@ class InvoiceCommand extends Command
     public function all(): void
     {
         $params = form()
-            ->addIf(confirm('Do you really want to advanced search?', false), function (){
-
-            })
+            ->addIf(confirm('Do you really want to advanced search?', false), function () {})
             ->submit();
 
         $invoiceParams = InvoiceParams::fromArray($params);
 
-
         /** @var Collection<InvoiceResponse> $invoices */
         $invoices = spin(
-            fn() => $this->xendit->invoice()
+            fn () => $this->xendit->invoice()
                 ->all($invoiceParams),
             'Fetching invoices...'
         );

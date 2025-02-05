@@ -208,8 +208,9 @@ class InvoiceResponse extends InvoiceData
     public function toTable(): array
     {
         $rows = collect($this->toArray());
+
         return $rows->mapWithKeys(function ($value, $key) {
-            if ($key == "id") {
+            if ($key == 'id') {
                 return [Str::upper($key) => $value];
             }
 
