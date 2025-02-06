@@ -3,11 +3,9 @@
 namespace Mrfansi\LaravelXendit\Traits;
 
 use Mrfansi\LaravelXendit\Data\Invoice\InvoiceParams;
-use Mrfansi\LaravelXendit\Data\Invoice\InvoiceResponse;
-use Illuminate\Support\Collection;
 use RuntimeException;
+
 use function Laravel\Prompts\search;
-use function Laravel\Prompts\spin;
 
 trait HasHelperFunctions
 {

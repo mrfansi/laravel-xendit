@@ -2,7 +2,4 @@
 
 namespace Mrfansi\LaravelXendit\Data\Transaction;
 
-class TransactionData
-{
-
-}
+class TransactionData {}

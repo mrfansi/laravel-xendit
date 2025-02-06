@@ -48,11 +48,11 @@ class InvoiceCommand extends Command
             $action = $this->argument('action');
             $this->dispatchAction($action);
         } catch (InvalidArgumentException $e) {
-            $this->error('[INVALID_INPUT] ' . $e->getMessage());
+            $this->error('[INVALID_INPUT] '.$e->getMessage());
         } catch (RuntimeException $e) {
-            $this->error('[API_ERROR] ' . $e->getMessage());
+            $this->error('[API_ERROR] '.$e->getMessage());
         } catch (Throwable $e) {
-            $this->error('[UNEXPECTED_ERROR] ' . $e->getMessage());
+            $this->error('[UNEXPECTED_ERROR] '.$e->getMessage());
             if (app()->environment('local')) {
                 $this->error($e->getTraceAsString());
             }
@@ -71,7 +71,7 @@ class InvoiceCommand extends Command
                         'PENDING',
                         'SETTLED',
                         'EXPIRED',
-                        'PAID'
+                        'PAID',
                     ],
                     default: [
                         'PENDING',
@@ -87,7 +87,7 @@ class InvoiceCommand extends Command
 
         /** @var Collection<InvoiceResponse> $invoices */
         $invoices = spin(
-            fn() => $this->xendit->invoice()
+            fn () => $this->xendit->invoice()
                 ->all($invoiceParams),
             'Fetching invoices...'
         );
@@ -113,7 +113,7 @@ class InvoiceCommand extends Command
         $id = $this->option('id') ?? $this->getInvoiceByExternalID();
 
         $invoice = spin(
-            fn() => $this->xendit->invoice()
+            fn () => $this->xendit->invoice()
                 ->retrieve($id),
             'Fetching invoice...'
         );

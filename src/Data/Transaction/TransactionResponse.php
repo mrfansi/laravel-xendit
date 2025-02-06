@@ -2,7 +2,4 @@
 
 namespace Mrfansi\LaravelXendit\Data\Transaction;
 
-class TransactionResponse
-{
-
-}
+class TransactionResponse {}
