@@ -9,6 +9,7 @@ use Mrfansi\LaravelXendit\Data\Invoice\InvoiceParams;
 use Mrfansi\LaravelXendit\Data\Invoice\InvoiceResponse;
 use Mrfansi\LaravelXendit\Helpers\Generator;
 use Mrfansi\LaravelXendit\Traits\HasDispatchActions;
+use Mrfansi\LaravelXendit\Traits\HasHelperFunctions;
 use Mrfansi\LaravelXendit\Xendit;
 use RuntimeException;
 use Throwable;
@@ -20,6 +21,7 @@ use function Laravel\Prompts\spin;
 class InvoiceCommand extends Command
 {
     use HasDispatchActions;
+    use HasHelperFunctions;
 
     public array $actions = ['all', 'find', 'new', 'expire'];
 
@@ -46,11 +48,11 @@ class InvoiceCommand extends Command
             $action = $this->argument('action');
             $this->dispatchAction($action);
         } catch (InvalidArgumentException $e) {
-            $this->error('[INVALID_INPUT] '.$e->getMessage());
+            $this->error('[INVALID_INPUT] ' . $e->getMessage());
         } catch (RuntimeException $e) {
-            $this->error('[API_ERROR] '.$e->getMessage());
+            $this->error('[API_ERROR] ' . $e->getMessage());
         } catch (Throwable $e) {
-            $this->error('[UNEXPECTED_ERROR] '.$e->getMessage());
+            $this->error('[UNEXPECTED_ERROR] ' . $e->getMessage());
             if (app()->environment('local')) {
                 $this->error($e->getTraceAsString());
             }
@@ -59,15 +61,33 @@ class InvoiceCommand extends Command
 
     public function all(): void
     {
-        $params = form()
-            ->addIf(confirm('Do you really want to advanced search?', false), function () {})
-            ->submit();
+        $params = [];
+
+        if (confirm('Do you really want to advanced search?', false)) {
+            $params = form()
+                ->multiselect(
+                    label: 'Status',
+                    options: [
+                        'PENDING',
+                        'SETTLED',
+                        'EXPIRED',
+                        'PAID'
+                    ],
+                    default: [
+                        'PENDING',
+                        'SETTLED',
+                    ],
+                    hint: 'Available status: PENDING, PAID, SETTLED, EXPIRED',
+                    name: 'statuses',
+                )
+                ->submit();
+        }
 
         $invoiceParams = InvoiceParams::fromArray($params);
 
         /** @var Collection<InvoiceResponse> $invoices */
         $invoices = spin(
-            fn () => $this->xendit->invoice()
+            fn() => $this->xendit->invoice()
                 ->all($invoiceParams),
             'Fetching invoices...'
         );
@@ -75,7 +95,9 @@ class InvoiceCommand extends Command
         $invoices = collect($invoices)->map(function (InvoiceResponse $invoice) {
             return [
                 'ID' => $invoice->id,
-                'External ID' => $invoice->externalId,
+                'Customer Name' => $invoice->customer->givenNames,
+                'Customer Email' => $invoice->customer->email,
+                'Customer Phone' => $invoice->customer->mobileNumber,
                 'Amount' => $invoice->amount,
                 'Currency' => $invoice->currency->value,
                 'Status' => $invoice->status,
@@ -84,5 +106,18 @@ class InvoiceCommand extends Command
 
         $rows = Generator::getTable($invoices);
         $this->table(...$rows);
+    }
+
+    public function find(): void
+    {
+        $id = $this->option('id') ?? $this->getInvoiceByExternalID();
+
+        $invoice = spin(
+            fn() => $this->xendit->invoice()
+                ->retrieve($id),
+            'Fetching invoice...'
+        );
+
+        dd($invoice);
     }
 }

@@ -9,7 +9,7 @@ use Mrfansi\LaravelXendit\Exceptions\ValidationException;
 class InvoiceCustomerData extends IndividualDetailData
 {
     public function __construct(
-        public string $givenNames,
+        public string  $givenNames,
         public ?string $surname = null,
         public ?string $email = null,
         public ?string $mobileNumber = null,
@@ -18,25 +18,42 @@ class InvoiceCustomerData extends IndividualDetailData
         public ?string $dateOfBirth = null,
         public ?string $gender = null,
         /** @var AddressData[] */
-        public ?array $addresses = null,
-    ) {
-        parent::__construct($givenNames, $surname, $nationality, $placeOfBirth, $dateOfBirth, $gender);
+        public ?array  $addresses = null,
+    )
+    {
         $this->validateEmail($email);
-        $this->validateMobileNumber($mobileNumber);
+        $this->mobileNumber = $this->cleanMobileNumber($mobileNumber);
+        $this->validateMobileNumber($this->mobileNumber);
         $this->validateAddresses($addresses);
+
+        parent::__construct($givenNames, $surname, $nationality, $placeOfBirth, $dateOfBirth, $gender);
+
+    }
+
+    /**
+     * Clean the mobile number by removing double plus signs.
+     */
+    private function cleanMobileNumber(?string $mobileNumber): ?string
+    {
+        if ($mobileNumber === null) {
+            return null;
+        }
+
+        // Replace multiple '+' signs with a single '+'
+        return preg_replace('/\++/', '+', $mobileNumber);
     }
 
     private function validateEmail(?string $email): void
     {
-        if ($email !== null && ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new ValidationException('Invalid email format');
+        if ($email !== null && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new ValidationException("Invalid email format. Found: $email");
         }
     }
 
     private function validateMobileNumber(?string $mobileNumber): void
     {
-        if ($mobileNumber !== null && ! preg_match('/^\+[1-9]\d{1,14}$/', $mobileNumber)) {
-            throw new ValidationException('Mobile number must be in E164 format (e.g., +6281234567890)');
+        if ($mobileNumber !== null && !preg_match('/^\+[1-9]\d{1,14}$/', $mobileNumber)) {
+            throw new ValidationException("Mobile number must be in E164 format (e.g., +6281234567890). Found: $mobileNumber");
         }
     }
 
@@ -44,7 +61,7 @@ class InvoiceCustomerData extends IndividualDetailData
     {
         if ($addresses !== null) {
             foreach ($addresses as $address) {
-                if (! ($address instanceof AddressData)) {
+                if (!($address instanceof AddressData)) {
                     throw new ValidationException('Each address must be an instance of AddressData');
                 }
             }
@@ -67,7 +84,7 @@ class InvoiceCustomerData extends IndividualDetailData
         }
 
         if ($this->addresses !== null) {
-            $array['addresses'] = array_map(fn (AddressData $address) => $address->toArray(), $this->addresses);
+            $array['addresses'] = array_map(fn(AddressData $address) => $address->toArray(), $this->addresses);
         }
 
         return $array;
@@ -84,7 +101,7 @@ class InvoiceCustomerData extends IndividualDetailData
             placeOfBirth: $data['place_of_birth'] ?? null,
             dateOfBirth: $data['date_of_birth'] ?? null,
             gender: $data['gender'] ?? null,
-            addresses: isset($data['addresses']) ? array_map(fn ($address) => AddressData::fromArray($address), $data['addresses']) : null,
+            addresses: isset($data['addresses']) ? array_map(fn($address) => AddressData::fromArray($address), $data['addresses']) : null,
         );
     }
 }

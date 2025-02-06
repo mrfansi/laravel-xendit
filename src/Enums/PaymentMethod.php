@@ -9,6 +9,8 @@ enum PaymentMethod: string
     case BANK_TRANSFER = 'BANK_TRANSFER';
     case EWALLET = 'EWALLET';
 
+    case PAYLATER = 'PAYLATER';
+
     // Indonesia Payment Methods
     case BCA = 'BCA';
     case BNI = 'BNI';

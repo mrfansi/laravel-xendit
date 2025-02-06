@@ -10,11 +10,14 @@ use InvalidArgumentException;
 use Mrfansi\LaravelXendit\Data\Invoice\InvoiceData;
 use Mrfansi\LaravelXendit\Data\Invoice\InvoiceParams;
 use Mrfansi\LaravelXendit\Data\Invoice\InvoiceResponse;
+use Mrfansi\LaravelXendit\Traits\HasHandleException;
 use RuntimeException;
 use Throwable;
 
 class Invoice
 {
+    use HasHandleException;
+
     /**
      * HTTP client instance for making API requests
      */
@@ -43,7 +46,9 @@ class Invoice
     public function all(?InvoiceParams $params = null): Collection
     {
         try {
-            $response = $this->client->get('/v2/invoices', $params?->toArray());
+            $response = $this->client
+                ->withQueryParameters($params->toArray())
+                ->get('/v2/invoices');
 
             return collect($response->json())
                 ->map(function (array $invoice) {
@@ -105,7 +110,7 @@ class Invoice
     public function retrieve(string $id): InvoiceResponse
     {
         try {
-            $response = $this->client->get("/v2/invoices/$id")->json();
+            $response = $this->client->get("/v2/invoices/$id");
 
             if (! $response->successful()) {
                 throw new RuntimeException(
@@ -113,7 +118,7 @@ class Invoice
                 );
             }
 
-            return InvoiceResponse::fromArray($response);
+            return InvoiceResponse::fromArray($response->json());
         } catch (Throwable $e) {
             Log::error('Failed to retrieve invoice', [
                 'error' => $e->getMessage(),
@@ -153,24 +158,5 @@ class Invoice
             ]);
             throw $this->handleException($e);
         }
-    }
-
-    /**
-     * Handle exception and convert to the appropriate type
-     *
-     * @param  Throwable  $e  Exception to handle
-     * @return Throwable Converted exception
-     */
-    private function handleException(Throwable $e): Throwable
-    {
-        if ($e instanceof ConnectionException) {
-            return $e;
-        }
-
-        if ($e instanceof InvalidArgumentException) {
-            return $e;
-        }
-
-        return new RuntimeException($e->getMessage(), 0, $e);
     }
 }

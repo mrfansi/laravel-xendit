@@ -3,6 +3,7 @@
 namespace Mrfansi\LaravelXendit\Data\Invoice;
 
 use Carbon\Carbon;
+use Exception;
 use Mrfansi\LaravelXendit\Exceptions\ValidationException;
 
 class InvoiceParams
@@ -32,7 +33,7 @@ class InvoiceParams
         public ?string $externalId = null,
         /** @var array<string> */
         public ?array $statuses = [],
-        public ?int $limit = 10,
+        public ?int $limit = 25,
         public ?string $createdAfter = null,
         public ?string $createdBefore = null,
         public ?string $paidAfter = null,
@@ -60,7 +61,7 @@ class InvoiceParams
         return new self(
             externalId: $data['external_id'] ?? null,
             statuses: $data['statuses'] ?? [],
-            limit: $data['limit'] ?? 10,
+            limit: $data['limit'] ?? 25,
             createdAfter: $data['created_after'] ?? null,
             createdBefore: $data['created_before'] ?? null,
             paidAfter: $data['paid_after'] ?? null,
@@ -87,7 +88,7 @@ class InvoiceParams
         }
 
         $validStatuses = ['PENDING', 'PAID', 'SETTLED', 'EXPIRED'];
-        if ($this->statuses && ! empty($this->statuses)) {
+        if (! empty($this->statuses)) {
             foreach ($this->statuses as $status) {
                 if (! in_array($status, $validStatuses)) {
                     throw new ValidationException("Invalid status: $status");
@@ -96,7 +97,7 @@ class InvoiceParams
         }
 
         $validClientTypes = ['API_GATEWAY', 'DASHBOARD', 'INTEGRATION', 'ON_DEMAND', 'RECURRING', 'MOBILE'];
-        if ($this->clientTypes && ! empty($this->clientTypes)) {
+        if (! empty($this->clientTypes)) {
             foreach ($this->clientTypes as $type) {
                 if (! in_array($type, $validClientTypes)) {
                     throw new ValidationException("Invalid client type: $type");
@@ -112,7 +113,7 @@ class InvoiceParams
     /**
      * Validate a pair of dates
      *
-     * @param  string  $field  Field name for error message
+     * @param  string  $field  Field name for an error message
      * @param  string|null  $after  After date
      * @param  string|null  $before  Before date
      *
@@ -128,12 +129,12 @@ class InvoiceParams
             try {
                 $afterDate = Carbon::parse($after);
                 $beforeDate = Carbon::parse($before);
-            } catch (\Exception $e) {
-                throw new ValidationException("Invalid ISO 8601 date format for {$field} range");
+            } catch (Exception $e) {
+                throw new ValidationException("Invalid ISO 8601 date format for $field range");
             }
 
             if ($afterDate->isAfter($beforeDate)) {
-                throw new ValidationException("Invalid ISO 8601 date format for {$field} range");
+                throw new ValidationException("Invalid ISO 8601 date format for $field range");
             }
         }
     }
@@ -147,7 +148,7 @@ class InvoiceParams
     {
         return array_filter([
             'external_id' => $this->externalId,
-            'statuses' => ! empty($this->statuses) ? $this->statuses : null,
+            'statuses' => ! empty($this->statuses) ? json_encode($this->statuses) : null,
             'limit' => $this->limit,
             'created_after' => $this->createdAfter,
             'created_before' => $this->createdBefore,
@@ -156,8 +157,8 @@ class InvoiceParams
             'expired_after' => $this->expiredAfter,
             'expired_before' => $this->expiredBefore,
             'last_invoice_id' => $this->lastInvoiceId,
-            'client_types' => ! empty($this->clientTypes) ? $this->clientTypes : null,
-            'payment_channels' => ! empty($this->paymentChannels) ? $this->paymentChannels : null,
+            'client_types' => ! empty($this->clientTypes) ? json_encode($this->clientTypes) : null,
+            'payment_channels' => ! empty($this->paymentChannels) ? json_encode($this->paymentChannels) : null,
             'on_demand_link' => $this->onDemandLink,
             'recurring_payment_id' => $this->recurringPaymentId,
         ], fn ($value) => $value !== null);
