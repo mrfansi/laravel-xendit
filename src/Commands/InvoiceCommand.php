@@ -27,6 +27,7 @@ class InvoiceCommand extends Command
 
     public $signature = 'xendit:invoice
                          {action=all : Action to perform (all/find/new/expire)}
+                         {--advanced : Advanced search}
                          {--id= : Invoice ID for find/expire actions}';
 
     public $description = 'Manage Xendit invoices for your account';
@@ -62,25 +63,25 @@ class InvoiceCommand extends Command
     public function all(): void
     {
         $params = [];
+        $advanced = $this->option('advanced') ?? confirm('Do you really want to advanced search?', false);
 
-        if (confirm('Do you really want to advanced search?', false)) {
-            $params = form()
+        if ($advanced) {
+            $params = array_filter(form()
                 ->multiselect(
                     label: 'Status',
                     options: [
-                        'PENDING',
-                        'SETTLED',
-                        'EXPIRED',
-                        'PAID',
+                        'PENDING' => 'Pending',
+                        'SETTLED' => 'Settled',
+                        'EXPIRED' => 'Expired',
+                        'PAID' => 'Paid',
                     ],
                     default: [
-                        'PENDING',
-                        'SETTLED',
+                        'SETTLED'
                     ],
                     hint: 'Available status: PENDING, PAID, SETTLED, EXPIRED',
                     name: 'statuses',
                 )
-                ->submit();
+                ->submit());
         }
 
         $invoiceParams = InvoiceParams::fromArray($params);
