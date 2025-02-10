@@ -63,7 +63,7 @@ class InvoiceCommand extends Command
     public function all(): void
     {
         $params = [];
-        $advanced = $this->option('advanced') ?? confirm('Do you really want to advanced search?', false);
+        $advanced = $this->option('advanced') ?? confirm(label: 'Do you really want to advanced search?', default: false);
 
         if ($advanced) {
             $params = array_filter(form()
@@ -76,7 +76,10 @@ class InvoiceCommand extends Command
                         'PAID' => 'Paid',
                     ],
                     default: [
-                        'SETTLED'
+                        'PENDING',
+                        'SETTLED',
+                        'EXPIRED',
+                        'PAID',
                     ],
                     hint: 'Available status: PENDING, PAID, SETTLED, EXPIRED',
                     name: 'statuses',
