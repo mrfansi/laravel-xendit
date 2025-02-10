@@ -63,7 +63,8 @@ class InvoiceCommand extends Command
     public function all(): void
     {
         $params = [];
-        $advanced = $this->option('advanced') ?? confirm(label: 'Do you really want to advanced search?', default: false);
+
+        $advanced = $this->option('advanced') ?: confirm(label: 'Do you really want to advanced search?', default: false);
 
         if ($advanced) {
             $params = array_filter(form()
@@ -77,7 +78,7 @@ class InvoiceCommand extends Command
                     ],
                     default: [
                         'PENDING',
-                        'SETTLED',,
+                        'SETTLED',
                         'EXPIRED',
                         'PAID',
                     ],
