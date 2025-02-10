@@ -76,7 +76,7 @@ class InvoiceCommand extends Command
                         'PAID' => 'Paid',
                     ],
                     default: [
-                        'SETTLED'
+                        'SETTLED',
                     ],
                     hint: 'Available status: PENDING, PAID, SETTLED, EXPIRED',
                     name: 'statuses',
