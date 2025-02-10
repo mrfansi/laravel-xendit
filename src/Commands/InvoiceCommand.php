@@ -122,7 +122,7 @@ class InvoiceCommand extends Command
                 'Status' => $invoice->status,
                 'Created At' => $invoice->created,
                 'Updated At' => $invoice->updated,
-            ]
+            ],
         ]);
 
         $rows = Generator::getTable($data);
@@ -207,6 +207,7 @@ class InvoiceCommand extends Command
 
         if (! confirm(label: "Are you sure you want to expire invoice {$id}?", default: false)) {
             $this->info('Operation cancelled.');
+
             return;
         }
 
@@ -250,15 +251,15 @@ class InvoiceCommand extends Command
                         'PAID' => 'Paid',
                     ],
                     default: [
-                        'PENDING'
+                        'PENDING',
                     ],
                     hint: 'Available status: PENDING, PAID, SETTLED, EXPIRED',
                     name: 'statuses'
                 )
-                ->addIf(fn($response) => in_array('PAID', $response['statuses']), function(){
+                ->addIf(fn ($response) => in_array('PAID', $response['statuses']), function () {
                     return now()->addDays(-1);
                 }, 'paid_after')
-                ->addIf(fn($response) => in_array('PAID', $response['statuses']), function() {
+                ->addIf(fn ($response) => in_array('PAID', $response['statuses']), function () {
                     return now();
                 }, 'paid_before')
                 ->submit()
